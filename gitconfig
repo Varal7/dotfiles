@@ -1,0 +1,70 @@
+[user]
+	email = varaal@gmail.com
+	name = Victor Quach
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[push]
+	default = current
+
+[branch]
+        autosetuprebase = always
+
+[alias]
+        co = checkout
+        dfc = diff --cached
+        uncommit = reset --soft HEAD^
+        unadd = reset HEAD
+        dlc = diff HEAD^ HEAD
+        st = status
+        lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+        lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+        lg = !"git lg1"
+        soom = branch --set-upstream-to=origin/master master
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+
+[core]
+attributesfile = ~/.gitattributes_global
+
+;[filter "nbstrip_full"]
+;clean = "jq --indent 1 \
+        ;'(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
+        ;| (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
+        ;| .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
+        ;| .cells[].metadata = {} \
+        ;'"
+
+smudge = cat
+required = true
+	autocrlf = input
+
+;# code notebooks strip out
+;[filter "fastai-nbstripout-code"]
+        ;clean = nbstripout
+        ;smudge = cat
+        ;required = true
+;[diff "ipynb-code"]
+        ;textconv = nbstripout -t
+
+;# docs notebooks strip out
+;[filter "fastai-nbstripout-docs"]
+        ;clean = nbstripout -d
+        ;smudge = cat
+        ;required = true
+;[diff "ipynb-docs"]
+        ;textconv = nbstripout -dt
+
+[hub]
+	host = github.mit.edu
+        protocol = ssh
+
+[credential]
+	helper = osxkeychain

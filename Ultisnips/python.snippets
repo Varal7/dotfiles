@@ -1,0 +1,85 @@
+snippet numpy "numpy" b
+import numpy as np
+endsnippet
+
+snippet json "json" b
+import ujson as json
+endsnippet
+
+snippet namespace "namespace" b
+class Namespace:
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+self = Namespace()
+endsnippet
+
+snippet torch "torch" b
+import torch
+from torch.autograd import Variable
+import torch.nn as nn
+import torch.optim as optim
+endsnippet
+
+snippet pandas "pandas" bb
+import pandas as pd
+endsnippet
+
+snippet plt "plt" b
+import matplotlib.pyplot as plt
+endsnippet
+
+snippet argparse "argparse" b
+import argparse
+
+parser = argparse.ArgumentParser(description='${0:Script with args}')
+parser.add_argument('--file', type=str, help='Filename', default="train_file")
+parser.add_argument('--type', type=int, help='Model type', default=0)
+parser.add_argument('--show', action="store_true", help='Show')
+args = parser.parse_args()
+endsnippet
+
+snippet logger "logger" b
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+fmt = logging.Formatter('%(asctime)s: [ %(message)s ]',
+			'%m/%d/%Y %I:%M:%S %p')
+console = logging.StreamHandler()
+console.setFormatter(fmt)
+logger.addHandler(console)
+endsnippet
+
+snippet tqdm "tqdm" b
+from tqdm import tqdm
+endsnippet
+
+snippet comp "comp" b
+import sys
+input = sys.stdin.readline
+
+def main():
+    ${0:pass}
+
+main()
+endsnippet
+
+snippet mii "mii" A
+map(int, input().split())
+endsnippet
+
+snippet lmii "lmii" A
+list(map(int, input().split()))
+endsnippet
+
+
+snippet improt "import" A
+import
+endsnippet
+
+snippet tmem "tmem" b
+import tracemalloc
+tracemalloc.start()
+
+print("Current: %d, Peak %d" % tracemalloc.get_traced_memory())
+endsnippet

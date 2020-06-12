@@ -1,0 +1,8 @@
+[pycodestyle]
+# Error codes: http://pycodestyle.pycqa.org/en/latest/intro.html
+
+# E111: indentation is not a multiple of four
+#       (python indent is usually checked with pylint)
+# E127: continuation line over-indented for visual indent
+# E501: line too long
+ignore = E111,E127,E501
