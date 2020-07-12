@@ -44,16 +44,6 @@ autoload -Uz compinit && compinit -i
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-notify() {
-  $@
-  if [ "$?" -eq "0" ]
-  then
-    curl "done.varal7.fr/?ok"
-  else
-    curl "done.varal7.fr/?ko"
-  fi
-}
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

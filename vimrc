@@ -629,8 +629,8 @@ function! Done()
 endfunction
 
 
-nnoremap <leader>vd :call Done()<CR>
-nnoremap <leader>ft :set filetype=
+" nnoremap <leader>vd :call Done()<CR>
+" nnoremap <leader>ft :set filetype=
 
 " Clears jupyter notebooks
 function! ClearNb()
