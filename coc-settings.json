@@ -1,0 +1,5 @@
+{
+  "python.jediEnabled": false,
+  "python.setLinder": "mypy",
+  "coc.preferences.previewAutoClose": true
+}

@@ -35,6 +35,7 @@ ln -sf $($RLINK -f pycodestyle) $HOME/.config/pycodestyle
 if  [ -x "$(command -v nvim)" ]; then
 	mkdir -p $HOME/.config/nvim/
 	ln -sf $($RLINK -f vimrc) $HOME/.config/nvim/init.vim
+	ln -sf $($RLINK -f coc-settings.json) $HOME/.config/nvim/
 fi
 
 # Install vim plugins

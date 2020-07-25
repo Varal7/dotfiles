@@ -189,3 +189,4 @@ getl () {
 alias reconda="conda deactivate && conda deactivate && conda deactivate && conda activate py365"
 
 alias fromcloud="curl https://vrac.varal7.fr/last.sh | sh"
+export PATH="/usr/local/opt/curl-openssl/bin:$PATH"

@@ -25,11 +25,13 @@ call plug#begin('~/.vim/plugged')
 "Plug 'vim-syntastic/syntastic'
 "Plug 'yuttie/comfortable-motion.vim'
 "Plugin 'CtrlP/ctrlp.vim'
-
+" Plug 'airblade/vim-gitgutter'
+" Plug 'symphorien/dwm.vim'
+" Plug 'tpope/vim-vinegar'
+" Plug 'SirVer/ultisnips'
 
 
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'chrisbra/csv.vim'
@@ -54,7 +56,6 @@ Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'scrooloose/nerdcommenter'
-" Plug 'symphorien/dwm.vim'
 Plug 'tell-k/vim-autoflake'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-abolish'
@@ -66,7 +67,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-" Plug 'tpope/vim-vinegar'
 Plug 'varal7/vim-slime'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -75,7 +75,6 @@ Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
 Plug 'will133/vim-dirdiff'
 Plug 'digitaltoad/vim-pug'
-" Plug 'SirVer/ultisnips'
 call plug#end()
 
 " Vim load indentation rules and plugins
@@ -364,10 +363,18 @@ nmap <leader>lf :Files<CR>
 " Autochangedir to that with .git
 let g:rooter_patterns = ['.git/']
 
-" for vim git gutter
-set updatetime=100
-nmap ]g <Plug>(GitGutterNextHunk)
-nmap [g <Plug>(GitGutterPrevHunk)
+" " navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
 
 
 "netrw
@@ -399,20 +406,19 @@ xnoremap <leader>P "*P
 
 "Ale
 let g:ale_linters = {
-      \         'python': ['pycodestyle', 'pylint', 'mypy'],
 \}
+""\         'python': ['mypy'],
 
 let g:ale_fixers = {
       \  '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': [],
       \ 'typescript': ['eslint', 'prettier'],
-\ 'python': ["yapf"],
 \}
 
 let g:ale_echo_msg_format = '%linter% says %s'
 
-" let g:ale_fix_on_save = 1
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 0
 
 "autocmd FileType c,cpp,java,php,python,tex,typescript autocmd BufWritePre <buffer> call ALEFix()
 
@@ -441,6 +447,8 @@ let g:coc_global_extensions = [
       \  'coc-tabnine',
       \  'coc-pairs',
       \  'coc-python',
+      \  'coc-git',
+      \  'coc-lists',
       \  'coc-vimtex',
       \  'coc-highlight'
       \ ]
