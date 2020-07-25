@@ -406,8 +406,8 @@ xnoremap <leader>P "*P
 
 "Ale
 let g:ale_linters = {
+      \ 'python': ['mypy'],
 \}
-""\         'python': ['mypy'],
 
 let g:ale_fixers = {
       \  '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -649,4 +649,3 @@ command! ClearNb :call ClearNb()
 
 nmap <Leader>j "=system('gitmoji-selector')<C-M>P
 
-let  g:python3_host_prog = "/data/rsg/nlp/quach/miniconda3/envs/py365/bin/python"
