@@ -1,5 +1,8 @@
 {
   "python.jediEnabled": false,
-  "python.setLinder": "mypy",
-  "coc.preferences.previewAutoClose": true
+  "python.setLinter": "mypy",
+  "coc.preferences.previewAutoClose": true,
+  "tabnine.priority": 98,
+  "eslint.autoFixOnSave": true,
+  "eslint.quiet": true
 }

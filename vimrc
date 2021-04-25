@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
 "Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 "Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 "Plug 'davidhalter/jedi-vim'
-"Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 "Plug 'ervandew/supertab'
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'ryanoasis/vim-devicons'
@@ -75,6 +75,9 @@ Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
 Plug 'will133/vim-dirdiff'
 Plug 'digitaltoad/vim-pug'
+Plug 'pgavlin/pulumi.vim'
+Plug 'pantharshit00/vim-prisma'
+
 call plug#end()
 
 " Vim load indentation rules and plugins
@@ -84,6 +87,7 @@ filetype plugin indent on    " required
 "set background=light
 set background=dark
 colorscheme gruvbox
+" colorscheme pulumi
 let g:gruvbox_italic=0
 
 " true colors in vim
@@ -173,6 +177,7 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
 
 " reload vimrc on load
 augroup myvimrc
@@ -338,7 +343,7 @@ nmap <right> :tabn<CR>
 
 " airline theme
 
-let g:airline_theme='bubblegum'
+let g:airline_theme='tomorrow'
 
 " camelCase to snake_case
 " %s/\(\l\)\(\u\)/\1\_\l\2/gc
@@ -410,17 +415,19 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-      \  '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': [],
       \ 'typescript': ['eslint', 'prettier'],
+      \ 'typescriptreact': ['eslint', 'prettier']
 \}
 
 let g:ale_echo_msg_format = '%linter% says %s'
 
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
 " let g:ale_fix_on_save = 0
 
 "autocmd FileType c,cpp,java,php,python,tex,typescript autocmd BufWritePre <buffer> call ALEFix()
+"
+
 
 nnoremap <leader>at :ALEToggle<CR>
 
@@ -450,7 +457,10 @@ let g:coc_global_extensions = [
       \  'coc-git',
       \  'coc-lists',
       \  'coc-vimtex',
-      \  'coc-highlight'
+      \  'coc-highlight',
+      \  'coc-prisma',
+      \  'coc-eslint',
+      \  'coc-explorer'
       \ ]
 
 " Better display for messages
@@ -464,6 +474,23 @@ nmap ]k :CocNext<CR>
 nmap [k :CocPrev<CR>
 
 nmap <leader>rn <Plug>(coc-rename)
+
+" Use <S-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-t> coc#refresh()
+else
+  inoremap <silent><expr> <c-t> coc#refresh()
+endif
+
+" Open explorer
+nnoremap <space>e :CocCommand explorer<CR>
+
+highlight link CocErrorSign GruvboxRed
+" highlight link CocWarningSign  
+" highlight link CocWarningSign 
+" highlight link CocInfoSign 
+" highlight link CocHintSign
+
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -501,8 +528,15 @@ autocmd CursorHold *  call CocActionAsync('highlight')
 
 
 " Remap for format selected region
-"vmap <leader>f  <Plug>(coc-format-selected)
-"nmap <leader>f  <Plug>(coc-format-selected)
+vmap <localleader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+command! -nargs=0 Format :call CocAction('format')
 
 augroup mygroup
   autocmd!
@@ -647,5 +681,4 @@ endfunction
 
 command! ClearNb :call ClearNb()
 
-nmap <Leader>j "=system('gitmoji-selector')<C-M>P
-
+" nmap <Leader>j "=system('gitmoji-selector')<C-M>P
