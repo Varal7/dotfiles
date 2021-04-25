@@ -453,14 +453,14 @@ let g:coc_global_extensions = [
       \  'coc-ultisnips',
       \  'coc-tabnine',
       \  'coc-pairs',
-      \  'coc-python',
       \  'coc-git',
       \  'coc-lists',
       \  'coc-vimtex',
       \  'coc-highlight',
       \  'coc-prisma',
       \  'coc-eslint',
-      \  'coc-explorer'
+      \  'coc-explorer',
+      \  'coc-pyright'
       \ ]
 
 " Better display for messages
