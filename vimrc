@@ -682,3 +682,8 @@ endfunction
 command! ClearNb :call ClearNb()
 
 " nmap <Leader>j "=system('gitmoji-selector')<C-M>P
+
+let s:host_vimrc = $HOME . '/.local-vimrc'
+if filereadable(s:host_vimrc)
+  execute 'source ' . s:host_vimrc
+endif
