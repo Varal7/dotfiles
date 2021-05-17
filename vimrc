@@ -12,29 +12,13 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
-"Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-"Plug 'davidhalter/jedi-vim'
-Plug 'edkolev/tmuxline.vim'
-"Plug 'ervandew/supertab'
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'sjbach/lusty'
-"Plug 'szymonmaszke/vimpyter' "Vundle
-"Plug 'vim-scripts/LycosaExplorer' " requires python2
-"Plug 'vim-syntastic/syntastic'
-"Plug 'yuttie/comfortable-motion.vim'
-"Plugin 'CtrlP/ctrlp.vim'
-" Plug 'airblade/vim-gitgutter'
-" Plug 'symphorien/dwm.vim'
-" Plug 'tpope/vim-vinegar'
-" Plug 'SirVer/ultisnips'
-
 
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'airblade/vim-rooter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'chrisbra/csv.vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'edkolev/tmuxline.vim'
 Plug 'elzr/vim-json'
 Plug 'google/vim-jsonnet'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
@@ -46,6 +30,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
 Plug 'liuchengxu/vista.vim'
@@ -55,6 +40,11 @@ Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'pantharshit00/vim-prisma'
+Plug 'pgavlin/pulumi.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tell-k/vim-autoflake'
 Plug 'terryma/vim-expand-region'
@@ -74,9 +64,6 @@ Plug 'vim-scripts/ttcoach'
 Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
 Plug 'will133/vim-dirdiff'
-Plug 'digitaltoad/vim-pug'
-Plug 'pgavlin/pulumi.vim'
-Plug 'pantharshit00/vim-prisma'
 
 call plug#end()
 
@@ -104,7 +91,6 @@ endif
 
 " Have vim jump to the last position when reoping a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
 
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
@@ -154,8 +140,8 @@ cnoremap WQ wq
 " let @r = ':wa:!chmod +x "%" && ./"%"'
 
 nnoremap gbc yypkA =<Esc>jOscale=2<Esc>:.,+1!bc<CR>kJ
-nnoremap gp :set paste<CR>
-nnoremap gu :set nopaste<CR>
+" nnoremap gp :set paste<CR>
+" nnoremap gu :set nopaste<CR>
 
 "" Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! w !sudo tee > /dev/null %
@@ -172,11 +158,13 @@ let g:tex_flavor = "latex"
 " Have a the absolute line number and the relative line number
 set number relativenumber
 
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+nmap <leader>qq  :set relativenumber!<CR>
+
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END
 
 
 " reload vimrc on load
@@ -294,9 +282,6 @@ nnoremap <CR>q :cwindow<CR>
 "Open location list
 nnoremap <CR>l :lwindow<CR>
 
-set statusline+=%{coc#status()}
-
-nnoremap <leader>m :SyntasticToggleMode<CR>
 
 " Tagbar
 "
@@ -309,33 +294,15 @@ nmap <leader>b :TagbarToggle<CR>
 let g:UltiSnipsSnippetsDir = "~/dotfiles/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME.'/dotfiles/UltiSnips']
 
-" dwm.vim (Tiled window manager)
-
-let g:dwm_map_keys = 0
-nmap <C-W>= <Plug>DWMFocus
-"nmap <C-C> <Plug>DWMClose
-"nmap <C-w> <Plug>DWMRotateCounterclockwise
-
 nnoremap <C-J> <C-W>w
 nnoremap <C-K> <C-W>W
 nmap <C-N> :vsplit<CR>
 nmap <C-C> :close<CR>
 
-"nmap <C-e> <Plug>DWMRotateClockwise " no need for that
-" heck, do terminal too
-"tmap <C-w> <Plug>DWMRotateCounterclockwise
-"tmap <C-I> <Plug>DWMFocus
-
-" terminal
-" nmap <leader>t :terminal<CR>
-
 " On enter, saves normal buffer to file
 nmap <silent><expr> <CR> empty(&buftype) ? ":w<CR>" : "<CR>"
 " gets last command
 nmap <localleader><localleader> :<UP>
-
-"executes current file
-"nmap <localleader><localleader> :!./%
 
 " arrows for pane
 nmap <left> :tabp<CR>
@@ -349,7 +316,6 @@ let g:airline_theme='tomorrow'
 " %s/\(\l\)\(\u\)/\1\_\l\2/gc
 
 autocmd filetype crontab setlocal nobackup nowritebackup
-
 
 "Try label-mode for a minimalist alternative to EasyMotion:
 let g:sneak#label = 1
@@ -368,23 +334,10 @@ nmap <leader>lf :Files<CR>
 " Autochangedir to that with .git
 let g:rooter_patterns = ['.git/']
 
-" " navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
-" show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
-" show commit contains current position
-nmap gc <Plug>(coc-git-commit)
-" create text object for git chunks
-omap ig <Plug>(coc-git-chunk-inner)
-xmap ig <Plug>(coc-git-chunk-inner)
-omap ag <Plug>(coc-git-chunk-outer)
-xmap ag <Plug>(coc-git-chunk-outer)
-
 
 "netrw
 " nmap - :Vexplore<CR>
-nmap - :Explore<CR>
+" nmap - :Explore<CR>
 let g:netrw_banner = 0
 
 " Nerd-tree like
@@ -428,8 +381,8 @@ let g:ale_echo_msg_format = '%linter% says %s'
 "autocmd FileType c,cpp,java,php,python,tex,typescript autocmd BufWritePre <buffer> call ALEFix()
 "
 
-
-nnoremap <leader>at :ALEToggle<CR>
+" nnoremap <leader>af :ALEFix<CR>
+" nnoremap <leader>at :ALEToggle<CR>
 
 "Rhubarb
 let g:github_enterprise_urls = ['https://github.mit.edu']
@@ -444,6 +397,7 @@ endfunction
 nnoremap <leader>w :call ToggleDiff()<cr>
 
 " Coc.vim
+"
 
 let g:coc_global_extensions = [
       \  'coc-json',
@@ -456,14 +410,35 @@ let g:coc_global_extensions = [
       \  'coc-git',
       \  'coc-lists',
       \  'coc-vimtex',
-      \  'coc-highlight',
       \  'coc-prisma',
       \  'coc-eslint',
       \  'coc-explorer',
       \  'coc-pyright'
       \ ]
 
+      " \  'coc-highlight',
+
+" " navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
+
+
 " Better display for messages
+set statusline+=%{coc#status()}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" airline integration with coc.vim
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 set cmdheight=2
 set signcolumn=yes
@@ -475,15 +450,12 @@ nmap [k :CocPrev<CR>
 
 nmap <leader>rn <Plug>(coc-rename)
 
-" Use <S-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-t> coc#refresh()
-else
-  inoremap <silent><expr> <c-t> coc#refresh()
-endif
+" Use <c-t> to trigger completion.
+inoremap <silent><expr> <c-t> coc#refresh()
 
 " Open explorer
 nnoremap <space>e :CocCommand explorer<CR>
+nnoremap - :CocCommand explorer<CR>
 
 highlight link CocErrorSign GruvboxRed
 " highlight link CocWarningSign  
@@ -547,9 +519,6 @@ augroup mygroup
 augroup end
 
 
-" airline integration with coc.vim
-"let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-"let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " Using CocList
 " Show all diagnostics
@@ -617,7 +586,6 @@ nnoremap <leader>go :Git checkout<leader>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
-nnoremap <leader>af :ALEFix<CR>
 
 " Easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -681,9 +649,9 @@ endfunction
 
 command! ClearNb :call ClearNb()
 
-" nmap <Leader>j "=system('gitmoji-selector')<C-M>P
 
 let s:host_vimrc = $HOME . '/.local-vimrc'
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
+
