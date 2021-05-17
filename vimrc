@@ -63,6 +63,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/ttcoach'
 Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
+Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'will133/vim-dirdiff'
 
 call plug#end()
@@ -71,14 +72,24 @@ call plug#end()
 " according to the detected filetype.
 filetype plugin indent on    " required
 
-"set background=light
-set background=dark
-colorscheme gruvbox
+" set background=light
+" set background=dark
+" colorscheme gruvbox
+colorscheme embark
 " colorscheme pulumi
 let g:gruvbox_italic=0
+let g:embark_terminal_italics = 1
+
+if exists('$TMUX')
+" Colors in tmux
+let &t_8f = "<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
+endif
+
 
 " true colors in vim
 set termguicolors
+" set notermguicolors
 
 " comment in italic
 "highlight Comment cterm=italic
@@ -309,8 +320,7 @@ nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
 
 " airline theme
-
-let g:airline_theme='tomorrow'
+let g:airline_theme='embark'
 
 " camelCase to snake_case
 " %s/\(\l\)\(\u\)/\1\_\l\2/gc
