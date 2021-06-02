@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Needs to manually install:
-# zsh, oh-my-zsh, tmux, git, hub, nvim, brew (if mac)
+# zsh, oh-my-zsh, tmux, git, hub, nvim, brew (if mac), ripgrep
 # oh-my-zsh : https://github.com/robbyrussell/oh-my-zsh
 # spaceship-prompt: https://github.com/denysdovhan/spaceship-prompt
 
