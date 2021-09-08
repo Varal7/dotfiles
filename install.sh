@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Needs to manually install:
-# zsh, oh-my-zsh, tmux, git, hub, nvim, brew (if mac)
+# zsh, oh-my-zsh, tmux, git, hub, nvim, brew (if mac), ripgrep, node, python
 # oh-my-zsh : https://github.com/robbyrussell/oh-my-zsh
 # spaceship-prompt: https://github.com/denysdovhan/spaceship-prompt
 
@@ -19,7 +19,7 @@ if  [ "$(uname)" == "Darwin" ]; then
   fi
 
   RLINK="greadlink"
-  ./wm.sh
+  # ./wm.sh
   ln -sf $($RLINK -f skhdrc) $HOME/.skhdrc
 fi
 
