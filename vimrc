@@ -12,7 +12,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
-
+" Plug 'vim-scripts/RltvNmbr.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'airblade/vim-rooter'
 Plug 'aserebryakov/vim-todo-lists'
@@ -20,6 +20,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'edkolev/tmuxline.vim'
 Plug 'elzr/vim-json'
+Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'google/vim-jsonnet'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
 Plug 'honza/vim-snippets'
@@ -44,6 +45,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'pantharshit00/vim-prisma'
 Plug 'pgavlin/pulumi.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tell-k/vim-autoflake'
@@ -63,9 +65,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/ttcoach'
 Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
-Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'will133/vim-dirdiff'
-
 call plug#end()
 
 " Vim load indentation rules and plugins
