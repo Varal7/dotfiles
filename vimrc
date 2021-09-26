@@ -79,6 +79,8 @@ colorscheme embark
 " colorscheme pulumi
 let g:gruvbox_italic=0
 let g:embark_terminal_italics = 1
+" remove background
+hi Normal guibg=NONE ctermbg=NONE
 
 if exists('$TMUX')
 " Colors in tmux
@@ -664,4 +666,3 @@ let s:host_vimrc = $HOME . '/.local-vimrc'
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
-
