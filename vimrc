@@ -667,3 +667,6 @@ let s:host_vimrc = $HOME . '/.local-vimrc'
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
+
+" remove background
+hi Normal guibg=NONE ctermbg=NONE
