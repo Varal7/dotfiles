@@ -23,7 +23,7 @@ Plug 'elzr/vim-json'
 Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'google/vim-jsonnet'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'jph00/swift-apple'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -65,6 +65,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/ttcoach'
 Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
+Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
 call plug#end()
 
@@ -411,6 +412,7 @@ nnoremap <leader>w :call ToggleDiff()<cr>
 
 let g:coc_global_extensions = [
       \  'coc-json',
+      \  'coc-clangd',
       \  'coc-neosnippet',
       \  'coc-snippets',
       \  'coc-tsserver',
@@ -494,6 +496,7 @@ nmap  gd <Plug>(coc-definition)
 nmap  gy <Plug>(coc-type-definition)
 nmap  gi <Plug>(coc-implementation)
 nmap  gr <Plug>(coc-references)
+nmap gh :CocCommand clangd.switchSourceHeader<CR>
 
 " Use K to show documentation in preview window
 nnoremap  K :call <SID>show_documentation()<CR>
@@ -664,4 +667,3 @@ let s:host_vimrc = $HOME . '/.local-vimrc'
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
-

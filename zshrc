@@ -196,8 +196,6 @@ export SPACESHIP_PROMPT_ORDER=(
     host          # Hostname section
     git           # Git section (git_branch + git_status)
     hg            # Mercurial section (hg_branch  + hg_status)
-    gradle        # Gradle section
-    maven         # Maven section
     package       # Package version
     node          # Node.js section
     ruby          # Ruby section
@@ -244,7 +242,8 @@ spaceship_git_last_commit() {
   spaceship::is_git || return
 
   local 'git_last_commit_status'
-  git_last_commit_status=$(git log --pretty='format:%s 🕑 %cr' 'HEAD^..HEAD' | head -n 1)
+
+  git_last_commit_status=$(git log --pretty='format:%s 🕑 %cr' 'HEAD^..HEAD' 2>/dev/null | head -n 1)
 
   [[ -z $git_last_commit_status ]] && return
 
