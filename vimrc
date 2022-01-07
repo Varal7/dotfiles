@@ -225,6 +225,8 @@ function! Cur(...)
 endfunction
 
 
+
+nmap <leader>tt :call Cur(0)<CR>
 nmap <leader>t0 :call Cur(0)<CR>
 nmap <leader>t1 :call Cur(1)<CR>
 nmap <leader>t2 :call Cur(2)<CR>
@@ -371,6 +373,9 @@ nnoremap <leader>p "*p
 nnoremap <leader>P "*P
 xnoremap <leader>p "*p
 xnoremap <leader>P "*P
+
+" Put from capture
+nnoremap <leader>ret :r /tmp/capture.out<CR>
 
 
 "Ale
