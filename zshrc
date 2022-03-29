@@ -146,6 +146,7 @@ alias nbstrip_jq="jq --indent 1 \
     '"
 alias ccat='pygmentize -g'
 alias ppp="paf . | pbcopy"
+alias ipy="ipython"
 
 alias code='tmux new-session -s code "ipython" || t code'
 alias py='vim +star ~/.temp.py'
@@ -295,3 +296,13 @@ codi() {
     hi NonText ctermfg=0 |\
     Codi $syntax" "$@"
 }
+
+alias ipy=ipython
+
+# capture the output of a command so it can be retrieved with ret
+cap () { tee /tmp/capture.out; }
+
+# return the output of the most recent command that was captured by cap
+ret () { cat /tmp/capture.out; }
+
+export PYTHONBREAKPOINT=ipdb.set_trace
