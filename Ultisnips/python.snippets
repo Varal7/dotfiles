@@ -15,12 +15,11 @@ endsnippet
 
 snippet torch "torch" b
 import torch
-from torch.autograd import Variable
 import torch.nn as nn
-import torch.optim as optim
+import torch.nn.functional as F
 endsnippet
 
-snippet pandas "pandas" bb
+snippet pandas "pandas" b
 import pandas as pd
 endsnippet
 
@@ -82,4 +81,13 @@ import tracemalloc
 tracemalloc.start()
 
 print("Current: %d, Peak %d" % tracemalloc.get_traced_memory())
+endsnippet
+
+
+snippet pdb "pdb" A
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet tpdb "tpdb" A
+import pdb; pdb.Pdb(skip=['torch.*']).set_trace()
 endsnippet

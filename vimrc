@@ -13,7 +13,9 @@ call plug#begin('~/.vim/plugged')
 
 
 " Plug 'vim-scripts/RltvNmbr.vim'
+" Plug 'honza/vim-snippets'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'OmniSharp/omnisharp-vim'
 Plug 'airblade/vim-rooter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'chrisbra/csv.vim'
@@ -23,7 +25,6 @@ Plug 'elzr/vim-json'
 Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'google/vim-jsonnet'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
-" Plug 'honza/vim-snippets'
 Plug 'jph00/swift-apple'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -67,6 +68,11 @@ Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
 Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
+Plug 'rcarriga/nvim-notify'
+Plug 'meain/vim-printer'
+Plug 'metakirby5/codi.vim'
+
+
 call plug#end()
 
 " Vim load indentation rules and plugins
@@ -238,10 +244,10 @@ nmap <leader>a <Plug>SlimeSendCC
 
 "In visual mode, send selection
 xmap <leader><leader> <Plug>SlimeRegionSend
-xmap <leader>f <Plug>SlimeRegionSend`>}}{j
+" xmap <leader>f <Plug>SlimeRegionSend`>}}{j
 
 "In normal mode, send paragraph
-nmap <leader>f <Plug>SlimeParagraphSend}}{j
+" nmap <leader>f <Plug>SlimeParagraphSend}}{j
 "In insert mode, send paragraph
 "imap <localleader>f <Esc><S-v><Plug>SlimeParagraphSend}a
 
@@ -251,16 +257,21 @@ nmap <leader><leader> <S-v><Plug>SlimeRegionSend
 "imap `` <Esc><S-v><Plug>SlimeRegionSend jI
 
 " New noremappings to move around cell
-nmap <leader>j /# %%<CR>j:noh<CR>
-nmap <leader>k k?# %%<CR>j:noh<CR>
+" nmap <leader>j /# %%<CR>j:noh<CR>
+" nmap <leader>k k?# %%<CR>j:noh<CR>
 
-nmap <leader>d o# %%<Esc>O<Esc>
-nmap <leader>D O# %%<Esc>o<Esc>
+" nmap <leader>d o# %%<Esc>O<Esc>
+" nmap <leader>D O# %%<Esc>o<Esc>
 "imap `d <CR># %%<CR><Esc>kk
 
-nmap <leader>S j?# %%<CR>jv/# %%<CR>k$<leader><leader>:noh<CR>
-nmap <leader>s <leader>S<leader>jzz
+" nmap <leader>S j?# %%<CR>jv/# %%<CR>k$<leader><leader>:noh<CR>
+" nmap <leader>s <leader>S<leader>jzz
+"
 nmap <leader>= ^"ayt=o<Esc>"ap
+
+" vim-printer
+let g:vim_printer_print_below_keybinding = '<leader>d'
+let g:vim_printer_print_above_keybinding = '<leader>D'
 
 " Fold with space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -299,12 +310,6 @@ nnoremap <CR>l :lwindow<CR>
 "
 nmap <leader>b :TagbarToggle<CR>
 
-
-" Ultisnips
-
-" Why is this not working???
-let g:UltiSnipsSnippetsDir = "~/dotfiles/UltiSnips"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME.'/dotfiles/UltiSnips']
 
 nnoremap <C-J> <C-W>w
 nnoremap <C-K> <C-W>W
@@ -416,7 +421,6 @@ let g:coc_global_extensions = [
       \  'coc-neosnippet',
       \  'coc-snippets',
       \  'coc-tsserver',
-      \  'coc-ultisnips',
       \  'coc-tabnine',
       \  'coc-pairs',
       \  'coc-git',
@@ -464,6 +468,8 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Use <c-t> to trigger completion.
 inoremap <silent><expr> <c-t> coc#refresh()
+
+nnoremap <leader>cmd :CocCommand<CR>
 
 " Open explorer
 nnoremap <space>e :CocCommand explorer<CR>
@@ -651,7 +657,6 @@ function! Done()
   quit!
 endfunction
 
-
 " nnoremap <leader>vd :call Done()<CR>
 " nnoremap <leader>ft :set filetype=
 
@@ -670,3 +675,5 @@ endif
 
 " remove background
 hi Normal guibg=NONE ctermbg=NONE
+
+
