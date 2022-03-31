@@ -14,6 +14,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'vim-scripts/RltvNmbr.vim'
 " Plug 'honza/vim-snippets'
+
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'airblade/vim-rooter'
@@ -37,8 +38,11 @@ Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
+Plug 'machakann/vim-swap'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
+Plug 'meain/vim-printer'
+Plug 'metakirby5/codi.vim'
 Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -46,11 +50,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'pantharshit00/vim-prisma'
 Plug 'pgavlin/pulumi.vim'
+Plug 'rcarriga/nvim-notify'
 Plug 'rust-lang/rust.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tell-k/vim-autoflake'
 Plug 'terryma/vim-expand-region'
+Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
@@ -68,9 +74,7 @@ Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
 Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
-Plug 'rcarriga/nvim-notify'
-Plug 'meain/vim-printer'
-Plug 'metakirby5/codi.vim'
+
 
 
 call plug#end()
@@ -151,6 +155,19 @@ let maplocalleader = "\\"
 cnoremap Wq wq
 cnoremap WQ wq
 
+nnoremap <silent> Q <nop>
+
+" Move lines in select mode
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" keep cursor centered
+nnoremap J mzJ`z
+nnoremap Y yg$
+nnoremap n nzz
+nnoremap N Nzz
+
+
 " let @v = '"nyy"np:s/train/val/g"np:s/train/test/g:noh'
 " let @d = '"nyy"np:s/train/dev/g"np:s/train/test/g:noh'
 " let @p = ':set paste"*p:set nopaste'
@@ -172,6 +189,11 @@ autocmd FileType python,java setlocal shiftwidth=4 softtabstop=0 expandtab
 " uncomment next line to have feedback on vimtex compilation
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor = "latex"
+
+"" <localleader>ll to start compilation
+"" <localleader>lv to show pdf
+"" <localleader>lr to refresh preview
+nnoremap <localleader>lr :!osascript ~/bin/refresh.scpt<CR>
 
 " Have a the absolute line number and the relative line number
 set number relativenumber
@@ -305,7 +327,8 @@ nnoremap <BS>l :lclose<CR>
 "Open quickfix
 nnoremap <CR>q :cwindow<CR>
 "Open location list
-nnoremap <CR>l :lwindow<CR>
+" nnoremap <CR>l :lwindow<CR>
+nnoremap <CR>l :CocDiagnostics<CR>
 
 
 " Tagbar
@@ -379,6 +402,11 @@ nnoremap <leader>P "*P
 xnoremap <leader>p "*p
 xnoremap <leader>P "*P
 
+xnoremap <leader>p "_dP
+
+" greatest remap ever
+xnoremap <localleader>p "_dP
+
 " Put from capture
 nnoremap <leader>ret :r /tmp/capture.out<CR>
 
@@ -434,7 +462,8 @@ let g:coc_global_extensions = [
       \  'coc-prisma',
       \  'coc-eslint',
       \  'coc-explorer',
-      \  'coc-pyright'
+      \  'coc-pyright',
+      \  'coc-solidity'
       \ ]
 
       " \  'coc-highlight',
@@ -682,3 +711,5 @@ endif
 hi Normal guibg=NONE ctermbg=NONE
 
 
+" inccommand shows you in realtime what changes your ex command should make. Right now it only supports s
+set inccommand=nosplit

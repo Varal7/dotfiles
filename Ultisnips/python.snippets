@@ -71,6 +71,13 @@ snippet lmii "lmii" A
 list(map(int, input().split()))
 endsnippet
 
+snippet mli "mii" A
+map(int, line.split())
+endsnippet
+
+snippet lmli "lmii" A
+list(map(int, line.split()))
+endsnippet
 
 snippet improt "import" A
 import
@@ -90,4 +97,20 @@ endsnippet
 
 snippet tpdb "tpdb" A
 import pdb; pdb.Pdb(skip=['torch.*']).set_trace()
+endsnippet
+
+snippet rlines "Read lines" b
+with open(filename) as f:
+    lines = f.readlines()
+
+for line in lines:
+    ${0:pass}
+
+endsnippet
+
+snippet rfile "Read file" b
+with open(filename) as f:
+    for line in f:
+        ${0:pass}
+
 endsnippet
