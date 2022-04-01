@@ -255,7 +255,6 @@ nnoremap <silent><C-b> :lua require('telescope.builtin').buffers()<CR>
 nnoremap <silent><C-q> :lua require('telescope.builtin').quickfix()<CR>
 " nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <silent><C-p> :lua require('telescope.builtin').find_files()<CR>
-nnoremap <silent><leader>gb :lua require('telescope.builtin').git_branches()<CR>
 
 nnoremap <silent><leader>lr :lua require('telescope.builtin').find_files({ no_ignore= true})<CR>
 nnoremap <silent><leader>vh :lua require('telescope.builtin').help_tags()<CR>
@@ -487,6 +486,8 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 iabbrev improt import
 
 " Fugitive
+nnoremap <leader>gbr :lua require('telescope.builtin').git_branches()<CR>
+nnoremap <leader>gbl :Git blame<CR>
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gc :Git commit<CR>
