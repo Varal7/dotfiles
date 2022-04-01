@@ -1,54 +1,27 @@
 #!/bin/bash
 
 # Needs to manually install:
-# zsh, oh-my-zsh, tmux, git, hub, nvim, brew (if mac), ripgrep, node, python
+# zsh, oh-my-zsh, tmux, git, hub, nvim, brew (if mac), ripgrep, node, python, stow
 # oh-my-zsh : https://github.com/robbyrussell/oh-my-zsh
 # spaceship-prompt: https://github.com/denysdovhan/spaceship-prompt
 
-
-# Symlink dotfiles
-RLINK="readlink"
-
-if  [ "$(uname)" == "Darwin" ]; then
-
-  # symlink nvim
-  if  ! [ -x "$(command -v greadlink)" ]; then
-        # Requires brew install coreutils
-        echo "You need to install coreutils first"
-        echo "brew install coreutils"
-  fi
-
-  RLINK="greadlink"
-  # ./wm.sh
-  ln -sf $($RLINK -f skhdrc) $HOME/.skhdrc
-fi
-
-ln -sf $($RLINK -f vimrc) $HOME/.vimrc
-ln -sf $($RLINK -f zshrc) $HOME/.zshrc
-ln -sf $($RLINK -f gitconfig) $HOME/.gitconfig
-ln -sf $($RLINK -f gitattributes_global) $HOME/.gitattributes_global
-ln -sf $($RLINK -f tmux.conf) $HOME/.tmux.conf
-ln -sf $($RLINK -f pylintrc) $HOME/.pylintrc
-ln -sf $($RLINK -f pycodestyle) $HOME/.config/pycodestyle
-
-# symlink nvim
-if  [ -x "$(command -v nvim)" ]; then
-	mkdir -p $HOME/.config/nvim/
-	ln -sf $($RLINK -f vimrc) $HOME/.config/nvim/init.vim
-	ln -sf $($RLINK -f coc-settings.json) $HOME/.config/nvim/
-	mkdir -p $HOME/.config/coc/ultisnips/
-	ln -sf $($RLINK -f Ultisnips/python.snippets) $HOME/.config/coc/ultisnips
-	ln -sf $($RLINK -f Ultisnips/latex.snippets) $HOME/.config/coc/ultisnips
-fi
+stow zsh
+stow tmux
+stow git
+stow python
+stow nvim
 
 # Install vim plugins
+nvim -c 'PlugInstall' -c 'qa!'
 
-vim -c 'PlugInstall' -c 'qa!'
+if  [ "$(uname)" == "Darwin" ]; then
+  # ./wm.sh
+  stow skhd
+fi
 
 # Install zsh extensions
 
 ## Spaceship
-
 git clone https://github.com/denysdovhan/spaceship-prompt.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship-prompt --depth=2
 ln -s ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship.zsh-theme
 

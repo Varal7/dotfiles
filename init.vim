@@ -1,1 +1,0 @@
-/Users/varal7/.config/nvim/init.vim
