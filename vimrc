@@ -1,5 +1,6 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
+filetype off
+
 " Load vim-plug
 if empty(glob("~/.local/share/nvim/site/autoload/plug.vim"))
     execute '!curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
@@ -12,11 +13,11 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
-" Plug 'vim-scripts/RltvNmbr.vim'
-" Plug 'honza/vim-snippets'
-
+Plug 'BurntSushi/ripgrep'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/vim-be-good'
 Plug 'airblade/vim-rooter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'chrisbra/csv.vim'
@@ -26,6 +27,7 @@ Plug 'elzr/vim-json'
 Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'google/vim-jsonnet'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
+Plug 'jpalardy/vim-slime'
 Plug 'jph00/swift-apple'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -45,15 +47,20 @@ Plug 'meain/vim-printer'
 Plug 'metakirby5/codi.vim'
 Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
+Plug 'mtikekar/nvim-send-to-term'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pantharshit00/vim-prisma'
 Plug 'pgavlin/pulumi.vim'
 Plug 'rcarriga/nvim-notify'
 Plug 'rust-lang/rust.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
+Plug 'sharkdp/fd'
 Plug 'tell-k/vim-autoflake'
 Plug 'terryma/vim-expand-region'
 Plug 'tomlion/vim-solidity'
@@ -66,22 +73,17 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'varal7/vim-slime'
+Plug 'tree-sitter/tree-sitter-python'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/ttcoach'
-Plug 'w0rp/ale'
 Plug 'wakatime/vim-wakatime'
 Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
 
-
-
 call plug#end()
 
-" Vim load indentation rules and plugins
-" according to the detected filetype.
-filetype plugin indent on    " required
+filetype plugin indent on
 
 " set background=light
 " set background=dark
@@ -91,20 +93,22 @@ colorscheme embark
 let g:gruvbox_italic=0
 let g:embark_terminal_italics = 1
 
+" airline theme
+let g:airline_theme='embark'
+" let g:airline_theme='gruvbox'
+
 if exists('$TMUX')
 " Colors in tmux
 let &t_8f = "<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-
 " true colors in vim
 set termguicolors
 " set notermguicolors
 
 " comment in italic
-"highlight Comment cterm=italic
-
+" highlight Comment cterm=italic
 
 " enables syntax highlighting by default.
 if has("syntax")
@@ -123,7 +127,6 @@ set hlsearch		" Highlight all matches
 set autowrite		" Automatically save before commands like :next and :make
 set hidden		" Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
-set number		" Show line number
 set expandtab		" Convert tabs into spaces
 set backspace=indent,eol,start
 set shiftround
@@ -131,6 +134,11 @@ set showmode
 set ruler
 set autoindent
 set title
+
+" Have a the absolute line number and the relative line number
+set number relativenumber
+
+nmap <leader>qq  :set relativenumber!<CR>
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
@@ -143,13 +151,15 @@ set t_Co=256
 set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 
-
 " Make life easier
 
 inoremap jk <Esc>
 inoremap Jk <Esc>
+tnoremap jk <C-\><C-n>
+
 let mapleader = ","
 let maplocalleader = "\\"
+
 "cnoremap W w
 "cnoremap Q q
 cnoremap Wq wq
@@ -167,16 +177,7 @@ nnoremap Y yg$
 nnoremap n nzz
 nnoremap N Nzz
 
-
-" let @v = '"nyy"np:s/train/val/g"np:s/train/test/g:noh'
-" let @d = '"nyy"np:s/train/dev/g"np:s/train/test/g:noh'
-" let @p = ':set paste"*p:set nopaste'
-" let @y = '"+y'
-" let @r = ':wa:!chmod +x "%" && ./"%"'
-
 nnoremap gbc yypkA =<Esc>jOscale=2<Esc>:.,+1!bc<CR>kJ
-" nnoremap gp :set paste<CR>
-" nnoremap gu :set nopaste<CR>
 
 "" Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! w !sudo tee > /dev/null %
@@ -184,7 +185,6 @@ cnoremap w!! w !sudo tee > /dev/null %
 "" Remove trailing spaces and trailing lines
 autocmd FileType c,cpp,java,php,python,tex,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd FileType python,java setlocal shiftwidth=4 softtabstop=0 expandtab
-
 
 " uncomment next line to have feedback on vimtex compilation
 let g:vimtex_compiler_progname = 'nvr'
@@ -195,107 +195,12 @@ let g:tex_flavor = "latex"
 "" <localleader>lr to refresh preview
 nnoremap <localleader>lr :!osascript ~/bin/refresh.scpt<CR>
 
-" Have a the absolute line number and the relative line number
-set number relativenumber
-
-nmap <leader>qq  :set relativenumber!<CR>
-
-" augroup numbertoggle
-"   autocmd!
-"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-" augroup END
-
 
 " reload vimrc on load
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
-
-"set splitbelow
-"set splitright
-
-" For pasting
-"let &t_SI .= "\<Esc>[?2004h"
-"let &t_EI .= "\<Esc>[?2004l"
-
-"inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
-"function! XTermPasteBegin()
-  "set pastetoggle=<Esc>[201~
-  "set paste
-  "return ""
-"endfunction
-
-
-" Slime
-
-let g:slime_no_mappings = 1 "disable default mappings
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "code:.0"}
-let g:slime_dont_ask_default = 1
-let g:slime_python_ipython = 1
-let g:slime_preserve_curpos = 1
-
-"Easily choose what pane to send to
-command! Code let b:slime_config = {"socket_name": "default", "target_pane": "code:.0"}
-command! Cur let b:slime_config = {"socket_name": "default", "target_pane": ":.0"}
-
-" command! Cur1 let b:slime_config = {"socket_name": "default", "target_pane": ":.1"}
-" command! Cur2 let b:slime_config = {"socket_name": "default", "target_pane": ":.2"}
-" command! Cur3 let b:slime_config = {"socket_name": "default", "target_pane": ":.3"}
-
-function! Cur(...)
-  let pane = a:0 >= 1 ? a:1 : 0
-  let b:slime_config = {"socket_name": "default", "target_pane": ":." . pane}
-  :echom b:slime_config['target_pane']
-endfunction
-
-
-
-nmap <leader>tt :call Cur(0)<CR>
-nmap <leader>t0 :call Cur(0)<CR>
-nmap <leader>t1 :call Cur(1)<CR>
-nmap <leader>t2 :call Cur(2)<CR>
-nmap <leader>t3 :call Cur(3)<CR>
-nmap <leader>t4 :call Cur(4)<CR>
-
-let @s = '^"wdt,x:call Cur(w),,j'
-
-nmap <leader>v <Plug>SlimeConfig
-nmap <leader>a <Plug>SlimeSendCC
-
-"In visual mode, send selection
-xmap <leader><leader> <Plug>SlimeRegionSend
-" xmap <leader>f <Plug>SlimeRegionSend`>}}{j
-
-"In normal mode, send paragraph
-" nmap <leader>f <Plug>SlimeParagraphSend}}{j
-"In insert mode, send paragraph
-"imap <localleader>f <Esc><S-v><Plug>SlimeParagraphSend}a
-
-""In normal mode, send current line
-nmap <leader><leader> <S-v><Plug>SlimeRegionSend
-""In insert mode, send current line
-"imap `` <Esc><S-v><Plug>SlimeRegionSend jI
-
-" New noremappings to move around cell
-" nmap <leader>j /# %%<CR>j:noh<CR>
-" nmap <leader>k k?# %%<CR>j:noh<CR>
-
-" nmap <leader>d o# %%<Esc>O<Esc>
-" nmap <leader>D O# %%<Esc>o<Esc>
-"imap `d <CR># %%<CR><Esc>kk
-
-" nmap <leader>S j?# %%<CR>jv/# %%<CR>k$<leader><leader>:noh<CR>
-" nmap <leader>s <leader>S<leader>jzz
-"
-nmap <leader>= ^"ayt=o<Esc>"ap
-
-" vim-printer
-let g:vim_printer_print_below_keybinding = '<leader>d'
-let g:vim_printer_print_above_keybinding = '<leader>D'
 
 " Fold with space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -304,21 +209,8 @@ vnoremap <Space> zf
 "toggle UndoTree
 nnoremap <leader>u :UndotreeToggle<cr>
 
-
-
 " Rainbow
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-
-" YouCompleteMe
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-"nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"nnoremap <leader>gd :YcmCompleter GetDoc<CR>
-
-" Fugitive: Open QuickFix window after grep
-"
-" autocmd QuickFixCmdPost *grep* cwindow
 
 "Close quickfix
 nnoremap <BS>q :cclose<CR>
@@ -335,14 +227,11 @@ nnoremap <CR>l :CocDiagnostics<CR>
 "
 nmap <leader>b :TagbarToggle<CR>
 
-
 nnoremap <C-J> <C-W>w
 nnoremap <C-K> <C-W>W
 nmap <C-N> :vsplit<CR>
 nmap <C-C> :close<CR>
 
-" On enter, saves normal buffer to file
-nmap <silent><expr> <CR> empty(&buftype) ? ":w<CR>" : "<CR>"
 " gets last command
 nmap <localleader><localleader> :<UP>
 
@@ -350,8 +239,6 @@ nmap <localleader><localleader> :<UP>
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
 
-" airline theme
-let g:airline_theme='embark'
 
 " camelCase to snake_case
 " %s/\(\l\)\(\u\)/\1\_\l\2/gc
@@ -361,35 +248,23 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 "Try label-mode for a minimalist alternative to EasyMotion:
 let g:sneak#label = 1
 
-" fzf as C-P
-nmap <C-p> :Files<CR>
-nmap <C-f> :Rg<CR>
-nmap <C-b> :Buffers<CR>
-nmap <C-g> :Rg <C-R><C-W><CR>
-nmap <C-s> :Lines<CR>
-" fzf like lusty
-nmap <leader>lr :Files %:p:h<CR>
-nmap <leader>lb :Buffers<CR>
-nmap <leader>lf :Files<CR>
+nnoremap <silent><C-f> :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <silent><C-g> :lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>") })<CR>
+nnoremap <silent><C-_> :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
+nnoremap <silent><C-b> :lua require('telescope.builtin').buffers()<CR>
+nnoremap <silent><C-q> :lua require('telescope.builtin').quickfix()<CR>
+" nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <silent><C-p> :lua require('telescope.builtin').find_files()<CR>
+nnoremap <silent><leader>lr :lua require('telescope.builtin').find_files({ no_ignore= true})<CR>
+nnoremap <silent><leader>vh :lua require('telescope.builtin').help_tags()<CR>
 
 " Autochangedir to that with .git
 let g:rooter_patterns = ['.git/']
 
 
 "netrw
-" nmap - :Vexplore<CR>
-" nmap - :Explore<CR>
 let g:netrw_banner = 0
-
-" Nerd-tree like
 let g:netrw_liststyle = 3
-"let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
-"let g:netrw_winsize = 25
-"augroup ProjectDrawer
-""autocmd!
-""autocmd VimEnter * :Vexplore
-"augroup END
 
 " Copy to clipboard
 nnoremap <leader>y "*y
@@ -410,28 +285,6 @@ xnoremap <localleader>p "_dP
 " Put from capture
 nnoremap <leader>ret :r /tmp/capture.out<CR>
 
-
-"Ale
-let g:ale_linters = {
-      \ 'python': ['mypy'],
-\}
-
-let g:ale_fixers = {
-      \ 'javascript': [],
-      \ 'typescript': ['eslint', 'prettier'],
-      \ 'typescriptreact': ['eslint', 'prettier']
-\}
-
-let g:ale_echo_msg_format = '%linter% says %s'
-
-" let g:ale_fix_on_save = 1
-" let g:ale_fix_on_save = 0
-
-"autocmd FileType c,cpp,java,php,python,tex,typescript autocmd BufWritePre <buffer> call ALEFix()
-"
-
-" nnoremap <leader>af :ALEFix<CR>
-" nnoremap <leader>at :ALEToggle<CR>
 
 "Rhubarb
 let g:github_enterprise_urls = ['https://github.mit.edu']
@@ -510,9 +363,9 @@ nnoremap <space>e :CocCommand explorer<CR>
 nnoremap - :CocCommand explorer<CR>
 
 highlight link CocErrorSign GruvboxRed
-" highlight link CocWarningSign  
-" highlight link CocWarningSign 
-" highlight link CocInfoSign 
+" highlight link CocWarningSign
+" highlight link CocWarningSign
+" highlight link CocInfoSign
 " highlight link CocHintSign
 
 
@@ -550,6 +403,16 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold *  call CocActionAsync('highlight')
+
+" Map function and class text objects
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 
 " Remap for format selected region
@@ -607,22 +470,21 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " <leader>Enter to turn hl off
-nnoremap <leader><CR> :noh<CR>
+nnoremap <leader><Space> :noh<CR>
 
 "Workaround until fixed in neovim
+" cf https://github.com/neoclide/coc.nvim/issues/668
+" cf https://github.com/neovim/neovim/issues/9881
 augroup secure_modeline_conflict_workaround
   autocmd!
   autocmd FileType help setlocal nomodeline
 augroup END
-
-imap <C-u> <Esc>viwUea
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 iabbrev improt import
 
 " Fugitive
-
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
@@ -669,10 +531,8 @@ let g:tagbar_type_typescript = {
 " NerdCommenter
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
-
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
 
@@ -683,9 +543,6 @@ nnoremap <leader>ls :Dispatch -compiler=ignore leetcode submit % && read<cr>
 nnoremap <leader>ld :LeetShow<CR>
 command! LeetShow let b:id = split(expand("%:r:p"), '\.')[0] | execute "Start -compiler=ignore leetcode show " b:id " && read"
 
-" Match python functions
-" syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
-"
 function! Done()
   :normal gg"*yG
   quit!
@@ -701,7 +558,6 @@ endfunction
 
 command! ClearNb :call ClearNb()
 
-
 let s:host_vimrc = $HOME . '/.local-vimrc'
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
@@ -710,6 +566,125 @@ endif
 " remove background
 hi Normal guibg=NONE ctermbg=NONE
 
-
 " inccommand shows you in realtime what changes your ex command should make. Right now it only supports s
 set inccommand=nosplit
+
+" telescope.lua
+
+lua <<EOF
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local previewers = require("telescope.previewers")
+local action_state = require("telescope.actions.state")
+local conf = require("telescope.config").values
+local actions = require("telescope.actions")
+
+require("telescope").setup({
+	defaults = {
+		file_sorter = require("telescope.sorters").get_fzy_sorter,
+		prompt_prefix = " >",
+		color_devicons = true,
+
+		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+
+		mappings = {
+			i = {
+				["<C-x>"] = false,
+				["<C-q>"] = actions.send_to_qflist,
+			},
+		},
+	},
+	extensions = {
+		fzy_native = {
+			override_generic_sorter = false,
+			override_file_sorter = true,
+		},
+	},
+})
+
+require("telescope").load_extension("fzy_native")
+EOF
+
+" treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+" Help files on right split
+augroup helpfiles
+  au!
+  au BufRead,BufEnter */doc/* wincmd L
+augroup END
+
+
+" harpoon
+nnoremap <silent><leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent><leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
+
+nnoremap <silent><leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent><leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent><leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent><leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
+
+" Slime-like stuff
+
+" Send to tmux with vim-slime
+
+let g:slime_no_mappings = 1 "disable default mappings
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{up-of}"}
+let g:slime_dont_ask_default = 1
+let g:slime_python_ipython = 1
+let g:slime_preserve_curpos = 1
+
+function! Cur(...)
+  let pane = a:0 >= 1 ? a:1 : 0
+  let b:slime_config = {"socket_name": "default", "target_pane": ":." . pane}
+  :echom b:slime_config['target_pane']
+endfunction
+
+nmap <leader>t0 :call Cur(0)<CR>
+nmap <leader>t1 :call Cur(1)<CR>
+nmap <leader>t2 :call Cur(2)<CR>
+nmap <leader>t3 :call Cur(3)<CR>
+nmap <leader>t4 :call Cur(4)<CR>
+
+let @s = '^"wdt,x:call Cur(w),,j'
+
+nmap <leader>v <Plug>SlimeConfig
+
+"In visual mode, send selection
+xmap <leader><leader> <Plug>SlimeRegionSend
+nmap <leader><leader> <S-v><Plug>SlimeRegionSend
+
+"Find what's before =
+nmap <leader>= ^"ayt=o<Esc>"ap
+
+" vim-printer
+let g:vim_printer_print_below_keybinding = '<leader>d'
+let g:vim_printer_print_above_keybinding = '<leader>D'
+
+
+" Send to terminal with harpoon
+nmap <localleader>" :lua require("harpoon.term").gotoTerminal({idx=1, create_with="split \| terminal"})<CR>
+vmap <localleader><localleader> "zy<CR>:lua require("harpoon.term").sendCommand(1,  vim.fn.getreg('"'))<CR>
+nmap <localleader><localleader> <S-v>"zy<CR>:lua require("harpoon.term").sendCommand(1,  vim.fn.getreg('"'))<CR>
+
+" Send to terminal with nvim-send-to-term
+let g:send_disable_mapping=1	
+nmap <leader>" :split \| term <CR>iipy<CR>jk:SendHere ipy<CR><C-w>j
+nmap <leader>s <Plug>SendLine
+vmap <leader>s <Plug>Send
+nmap <leader>h <C-w>k:SendHere ipy<CR><C-w>j
+
+" Don't forget to 
+" :UpdateRemotePlugins
