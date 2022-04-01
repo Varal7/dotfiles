@@ -38,7 +38,7 @@ if  [ -x "$(command -v nvim)" ]; then
 	ln -sf $($RLINK -f coc-settings.json) $HOME/.config/nvim/
 	mkdir -p $HOME/.config/coc/ultisnips/
 	ln -sf $($RLINK -f Ultisnips/python.snippets) $HOME/.config/coc/ultisnips
-	ln -sf $($RLINK -f Ultisnips/tex.snippets) $HOME/.config/coc/ultisnips
+	ln -sf $($RLINK -f Ultisnips/latex.snippets) $HOME/.config/coc/ultisnips
 fi
 
 # Install vim plugins
