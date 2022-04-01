@@ -255,6 +255,8 @@ nnoremap <silent><C-b> :lua require('telescope.builtin').buffers()<CR>
 nnoremap <silent><C-q> :lua require('telescope.builtin').quickfix()<CR>
 " nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <silent><C-p> :lua require('telescope.builtin').find_files()<CR>
+nnoremap <silent><leader>gb :lua require('telescope.builtin').git_branches()<CR>
+
 nnoremap <silent><leader>lr :lua require('telescope.builtin').find_files({ no_ignore= true})<CR>
 nnoremap <silent><leader>vh :lua require('telescope.builtin').help_tags()<CR>
 
@@ -491,6 +493,10 @@ nnoremap <leader>gc :Git commit<CR>
 nnoremap <leader>gl :Git --paginate lg1<CR>
 nnoremap <leader>gp :Git push -u<CR>
 nnoremap <leader>gd :Gdiff<CR>
+" use gd on a file to open vimdiff
+" then use
+nnoremap <leader>gj :diffget //3<CR>
+nnoremap <leader>gk :diffget //2<CR>
 
 
 " Easy-align
