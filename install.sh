@@ -15,8 +15,8 @@ stow nvim
 nvim -c 'PlugInstall' -c 'qa!'
 
 if  [ "$(uname)" == "Darwin" ]; then
-  # ./wm.sh
   stow skhd
+  stow yabai
 fi
 
 # Install zsh extensions
