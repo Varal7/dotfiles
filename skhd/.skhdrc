@@ -93,8 +93,8 @@ lctrl + cmd + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
 lctrl + cmd + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
 lctrl + cmd + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
 lctrl + cmd + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
-lctrl + cmd + alt - 5 : yabai -m window --space 3; yabai -m space --focus 5
-lctrl + cmd + alt - 6 : yabai -m window --space 4; yabai -m space --focus 6
+lctrl + cmd + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5
+lctrl + cmd + alt - 6 : yabai -m window --space 6; yabai -m space --focus 6
 
 # Displays
 lctrl + cmd + alt - left   : yabai -m window --display west  ; yabai -m display --focus west
