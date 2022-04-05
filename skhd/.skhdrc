@@ -123,7 +123,7 @@ lctrl + alt - l : yabai -m window --resize right:50:0; \
 lctrl + alt - 0x18 : yabai -m space --balance
 
 # Enable / Disable gaps in current workspace
-lctrl + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
+cmd + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
 # Rotate windows clockwise and anticlockwise
 # cmd + alt - 0x1E : yabai -m space --rotate 270

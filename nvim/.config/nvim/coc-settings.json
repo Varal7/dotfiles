@@ -3,6 +3,7 @@
   "coc.preferences.previewAutoClose": true,
   "tabnine.priority": 98,
   "eslint.autoFixOnSave": true,
+  "explorer.file.showHiddenFiles":true,
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.virtualTextPrefix": "     ■ ",

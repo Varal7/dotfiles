@@ -17,6 +17,7 @@ nvim -c 'PlugInstall' -c 'qa!'
 if  [ "$(uname)" == "Darwin" ]; then
   stow skhd
   stow yabai
+  stow kitty
 fi
 
 # Install zsh extensions
@@ -30,3 +31,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # Zsh completions
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+
+# Zsh nvm
+git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-nvm
+

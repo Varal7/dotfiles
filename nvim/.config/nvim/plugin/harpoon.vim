@@ -10,6 +10,7 @@ nnoremap <silent><leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
 
 " Send to terminal with harpoon
 nmap <localleader>" :lua require("harpoon.term").gotoTerminal({idx=1, create_with="split \| terminal"})<CR>
+nmap <leader>tt :lua require("harpoon.term").gotoTerminal({idx=1})<CR>
 vmap <localleader><localleader> "zy<CR>:lua require("harpoon.term").sendCommand(1,  vim.fn.getreg('"'))<CR>
 nmap <localleader><localleader> <S-v>"zy<CR>:lua require("harpoon.term").sendCommand(1,  vim.fn.getreg('"'))<CR>
 
