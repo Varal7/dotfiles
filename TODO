@@ -1,5 +1,3 @@
-- Use a personal submodule for personal configs
-  - Mostly to replace local-zshrc
 - Stow in the bin/ directory
 - Fix the vim search through hidden files
 - vim Refactoring plugin
