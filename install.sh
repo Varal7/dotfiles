@@ -10,15 +10,16 @@ stow tmux
 stow git
 stow python
 stow nvim
-
-# Install vim plugins
-nvim -c 'PlugInstall' -c 'qa!'
+stow personal
 
 if  [ "$(uname)" == "Darwin" ]; then
   stow skhd
   stow yabai
   stow kitty
 fi
+
+# Install vim plugins
+nvim -c 'PlugInstall' -c 'qa!'
 
 # Install zsh extensions
 
@@ -34,4 +35,3 @@ git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zs
 
 # Zsh nvm
 git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-nvm
-
