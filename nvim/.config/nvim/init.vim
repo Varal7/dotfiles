@@ -134,7 +134,7 @@ set title
 " Have a the absolute line number and the relative line number
 set number relativenumber
 
-nmap <leader>qq  :set relativenumber!<CR>
+nnoremap <leader>ll  :set relativenumber!<CR>
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
