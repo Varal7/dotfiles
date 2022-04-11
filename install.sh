@@ -5,6 +5,12 @@
 # oh-my-zsh : https://github.com/robbyrussell/oh-my-zsh
 # spaceship-prompt: https://github.com/denysdovhan/spaceship-prompt
 
+# On mac:
+# https://github.com/dshnkao/SpaceId
+# https://github.com/koekeishiya/yabai
+# https://github.com/koekeishiya/skhd
+# https://sw.kovidgoyal.net/kitty/binary/
+
 stow zsh
 stow tmux
 stow git

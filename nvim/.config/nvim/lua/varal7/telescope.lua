@@ -15,6 +15,19 @@ require("telescope").setup({
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
+                vimgrep_arguments = {
+                  "rg",
+                  "--color=never",
+                  "--no-heading",
+                  "--with-filename",
+                  "--line-number",
+                  "--column",
+                  "--smart-case",
+                  "--hidden",
+                  "--glob",
+                  '!.git'
+                },
+
 		mappings = {
 			i = {
 				["<C-x>"] = false,

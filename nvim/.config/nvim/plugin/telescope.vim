@@ -1,4 +1,5 @@
-nnoremap <silent><C-f> :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+" nnoremap <silent><C-f> :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <silent><C-f> :lua require('telescope.builtin').live_grep()<CR>
 nnoremap <silent><C-g> :lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>")})<CR>
 " Ctrl+/ to search in file
 nnoremap <silent><C-_> :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
