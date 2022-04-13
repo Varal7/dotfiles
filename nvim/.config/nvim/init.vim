@@ -139,7 +139,7 @@ set number relativenumber
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 " Always show statusline
-set laststatus=2
+set laststatus=3
 
 "" Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256

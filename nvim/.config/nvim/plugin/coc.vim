@@ -13,6 +13,7 @@ let g:coc_global_extensions = [
       \  'coc-vimtex',
       \  'coc-prisma',
       \  'coc-eslint',
+      \  'coc-prettier',
       \  'coc-explorer',
       \  'coc-pyright',
       \  'coc-solidity'

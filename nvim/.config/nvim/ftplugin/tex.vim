@@ -40,3 +40,5 @@ nnoremap <leader>i :call ImageFromClipboard()<CR>
 
 " set conceallevel=1
 " let g:tex_conceal='abdmg'
+"
+nnoremap <leader>es :CocCommand snippets.editSnippets<CR>
