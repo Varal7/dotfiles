@@ -45,7 +45,7 @@ unset conf
 
 unalias ll
 alias vim="nvim"
-alias sl="ls"
+alias sl="exa --icons"
 alias l="exa --icons"
 alias ll="exa --icons -la -snew"
 alias lt="exa --icons --tree"

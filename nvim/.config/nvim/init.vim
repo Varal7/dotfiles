@@ -8,72 +8,55 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-
-Plug 'BurntSushi/ripgrep'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'ThePrimeagen/harpoon'
-Plug 'ThePrimeagen/refactoring.nvim'
-Plug 'ThePrimeagen/vim-be-good'
-Plug 'airblade/vim-rooter'
-Plug 'aserebryakov/vim-todo-lists'
+" Languages
 Plug 'chrisbra/csv.vim'
+" Plug 'OmniSharp/omnisharp-vim'
 Plug 'digitaltoad/vim-pug'
-Plug 'edkolev/tmuxline.vim'
 Plug 'elzr/vim-json'
-Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'google/vim-jsonnet'
-Plug 'gregsexton/gitv', {'on': ['Gitv']}
-Plug 'jpalardy/vim-slime'
 Plug 'jph00/swift-apple'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-sneak'
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
-Plug 'liuchengxu/vista.vim'
-Plug 'luochen1990/rainbow'
+Plug 'tomlion/vim-solidity'
+Plug 'rust-lang/rust.vim'
+Plug 'pantharshit00/vim-prisma'
+Plug 'tree-sitter/tree-sitter-python'
+
+" Pretty
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
+Plug 'kyazdani42/nvim-web-devicons'
+
+" repl
+Plug 'jpalardy/vim-slime'
+Plug 'metakirby5/codi.vim'
+Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/refactoring.nvim'
+
+" Productivity
+Plug 'airblade/vim-rooter'
+Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-sneak'
 Plug 'machakann/vim-swap'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'meain/vim-printer'
-Plug 'metakirby5/codi.vim'
-Plug 'mileszs/ack.vim'
-Plug 'morhetz/gruvbox'
-Plug 'mtikekar/nvim-send-to-term'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'pantharshit00/vim-prisma'
-Plug 'pgavlin/pulumi.vim'
 Plug 'rcarriga/nvim-notify'
-Plug 'rust-lang/rust.vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
-Plug 'sharkdp/fd'
-Plug 'tell-k/vim-autoflake'
 Plug 'terryma/vim-expand-region'
-Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tree-sitter/tree-sitter-python'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/ttcoach'
 Plug 'wakatime/vim-wakatime'
 Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
@@ -82,17 +65,19 @@ call plug#end()
 
 filetype plugin indent on
 
-" set background=light
-" set background=dark
-" colorscheme gruvbox
 colorscheme embark
-" colorscheme pulumi
-let g:gruvbox_italic=0
-let g:embark_terminal_italics = 1
 
-" airline theme
-let g:airline_theme='embark'
-" let g:airline_theme='gruvbox'
+let g:embark_terminal_italics = 1
+let g:embark_terminalcolors = 1
+
+lua << END
+local embark = require('varal7.lualine');
+
+require('lualine').setup {
+  -- options = { theme  = embark }
+}
+END
+
 
 if exists('$TMUX')
 " Colors in tmux
@@ -103,9 +88,6 @@ endif
 " true colors in vim
 set termguicolors
 " set notermguicolors
-
-" comment in italic
-" highlight Comment cterm=italic
 
 " enables syntax highlighting by default.
 if has("syntax")
@@ -127,7 +109,7 @@ set mouse=a		" Enable mouse usage (all modes)
 set expandtab		" Convert tabs into spaces
 set backspace=indent,eol,start
 set shiftround
-set showmode
+set noshowmode
 set ruler
 set autoindent
 set title
@@ -157,10 +139,6 @@ let maplocalleader = "\\"
 
 nnoremap <leader>ll  :set relativenumber!<CR>
 
-nnoremap imz :echo vimtex#syntax#in_mathzone<CR>
-
-"cnoremap W w
-"cnoremap Q q
 cnoremap Wq wq
 cnoremap WQ wq
 
@@ -209,6 +187,16 @@ nnoremap <CR>q :cwindow<CR>
 "Open location list
 " nnoremap <CR>l :lwindow<CR>
 nnoremap <CR>l :CocDiagnostics<CR>
+
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [Q :cfirst<CR>
+nnoremap ]Q :clast<CR>
+
+nnoremap [l :lprevious<CR>
+nnoremap ]l :lnext<CR>
+nnoremap [L :lfirst<CR>
+nnoremap ]L :llast<CR>
 
 
 nnoremap <C-J> <C-W>w
@@ -299,10 +287,6 @@ augroup helpfiles
   au!
   au BufRead,BufEnter */doc/* wincmd L
 augroup END
-
-" Slime-like stuff
-
-" Send to tmux with vim-slime
 
 " vim-printer
 let g:vim_printer_print_below_keybinding = '<leader>d'

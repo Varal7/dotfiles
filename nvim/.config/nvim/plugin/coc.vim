@@ -19,7 +19,6 @@ let g:coc_global_extensions = [
       \  'coc-solidity'
       \ ]
 
-      " \  'coc-highlight',
 
 " " navigate chunks of current buffer
 nmap [g <Plug>(coc-git-prevchunk)
@@ -40,10 +39,8 @@ set statusline+=%{coc#status()}
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " airline integration with coc.vim
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
-set cmdheight=2
+set cmdheight=1
 set signcolumn=yes
 nmap [c <Plug>(coc-diagnostic-prev)
 nmap ]c <Plug>(coc-diagnostic-next)
