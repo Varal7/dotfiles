@@ -70,14 +70,7 @@ colorscheme embark
 let g:embark_terminal_italics = 1
 let g:embark_terminalcolors = 1
 
-lua << END
-local embark = require('varal7.lualine');
-
-require('lualine').setup {
-  -- options = { theme  = embark }
-}
-END
-
+hi Normal guibg=NONE ctermbg=NONE
 
 if exists('$TMUX')
 " Colors in tmux
@@ -117,11 +110,9 @@ set title
 " Have a the absolute line number and the relative line number
 set number relativenumber
 
-
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 " Always show statusline
-set laststatus=3
 
 "" Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
@@ -163,9 +154,7 @@ cnoremap w!! w !sudo tee > /dev/null %
 autocmd FileType c,cpp,java,php,python,tex,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd FileType python,java setlocal shiftwidth=4 softtabstop=0 expandtab
 
-nnoremap <localleader>lr :!osascript ~/bin/refresh.scpt<CR>
-
-" reload vimrc on load
+" reload vimrc on save
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
@@ -178,26 +167,20 @@ vnoremap <Space> zf
 " Rainbow
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
-"Close quickfix
+" Quickfix list and location list
 nnoremap <BS>q :cclose<CR>
-"Close location list
-nnoremap <BS>l :lclose<CR>
-"Open quickfix
 nnoremap <CR>q :cwindow<CR>
-"Open location list
-" nnoremap <CR>l :lwindow<CR>
-nnoremap <CR>l :CocDiagnostics<CR>
-
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [Q :cfirst<CR>
 nnoremap ]Q :clast<CR>
 
+nnoremap <BS>l :lclose<CR>
+nnoremap <CR>l :CocDiagnostics<CR>
 nnoremap [l :lprevious<CR>
 nnoremap ]l :lnext<CR>
 nnoremap [L :lfirst<CR>
 nnoremap ]L :llast<CR>
-
 
 nnoremap <C-J> <C-W>w
 nnoremap <C-K> <C-W>W
@@ -207,9 +190,6 @@ nmap <C-C> :close<CR>
 " arrows for pane
 nmap <left> :tabp<CR>
 nmap <right> :tabn<CR>
-
-" camelCase to snake_case
-" %s/\(\l\)\(\u\)/\1\_\l\2/gc
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 
@@ -246,7 +226,7 @@ nnoremap <leader>w :call ToggleDiff()<cr>
 " <leader>Enter to turn hl off
 nnoremap <leader><Space> :noh<CR>
 
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :edit $MYVIMRC<cr>
 
 iabbrev improt import
 
@@ -256,28 +236,12 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Leetcode
-nnoremap <leader>lt :Dispatch -compiler=ignore leetcode test % && read<cr>
-nnoremap <leader>ls :Dispatch -compiler=ignore leetcode submit % && read<cr>
-nnoremap <leader>ld :LeetShow<CR>
-command! LeetShow let b:id = split(expand("%:r:p"), '\.')[0] | execute "Start -compiler=ignore leetcode show " b:id " && read"
-
-function! Done()
-  :normal gg"*yG
-  quit!
-endfunction
-
-" nnoremap <leader>vd :call Done()<CR>
-" nnoremap <leader>ft :set filetype=
-
 " TODO replace with personal vim config
 let s:host_vimrc = $HOME . '/.local-vimrc'
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
 
-" remove background
-hi Normal guibg=NONE ctermbg=NONE
 
 " inccommand shows you in realtime what changes your ex command should make. Right now it only supports s
 set inccommand=nosplit
@@ -296,3 +260,4 @@ let g:vim_printer_print_above_keybinding = '<leader>D'
 " :UpdateRemotePlugins
 "
 lua require("varal7")
+

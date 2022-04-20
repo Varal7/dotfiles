@@ -43,7 +43,3 @@ def handle_result(args, data, target_window_id, boss):
             print("Ooops. Are you at a password prompt?")
 
 handle_result.type_of_input = 'text'
-
-if __name__ == '__main__':
-    import sys
-    main(sys.argv)
