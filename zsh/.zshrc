@@ -43,7 +43,7 @@ unset conf
 
 # My aliases
 
-unalias ll
+# unalias ll
 alias vim="nvim"
 alias sl="exa --icons"
 alias l="exa --icons"
@@ -119,20 +119,20 @@ t() {
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
-# like normal z when used with arguments but displays an fzf prompt when used without.
-unalias z
-z() {
-  if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
-  else
-    _last_z_args="$@"
-    _z "$@"
-  fi
-}
+# # like normal z when used with arguments but displays an fzf prompt when used without.
+# unalias z
+# z() {
+#   if [[ -z "$*" ]]; then
+#     cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+#   else
+#     _last_z_args="$@"
+#     _z "$@"
+#   fi
+# }
 
-zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
-}
+# zz() {
+#   cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
+# }
 
 if [[ -a ~/.local-zshrc ]]; then
     source ~/.local-zshrc
