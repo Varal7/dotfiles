@@ -126,8 +126,8 @@ lctrl + alt - 0x18 : yabai -m space --balance
 cmd + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
 # Rotate windows clockwise and anticlockwise
-# cmd + alt - 0x1E : yabai -m space --rotate 270
-# cmd + alt - 0x21 : yabai -m space --rotate 90
+lctrl + cmd + alt - 0x1E : yabai -m space --rotate 270
+lctrl + cmd + alt - 0x21 : yabai -m space --rotate 90
 
 # Rotate on X and Y Axis
 shift + alt - x : yabai -m space --mirror x-axis
