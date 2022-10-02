@@ -148,3 +148,4 @@ cmd + alt - space : \
 cmd + alt - f         : yabai -m window --toggle zoom-fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen
 
+cmd + alt - t         : touch /tmp/skhd-touch
