@@ -1,0 +1,13 @@
+## Debugging
+
+When debugging, continue. Otherwise start debugging.                | F5         
+Stop debugging.                                                     | F3         
+Restart debugging with the same configuration.                      | F4         
+Pause debuggee.                                                     | F6         
+Toggle line breakpoint on the current line.                         | F9         
+Toggle conditional line breakpoint or logpoint on the current line. | <leader>F9 
+Add a function breakpoint for the expression under cursor           | F8         
+Run to Cursor                                                       | <leader>F8 
+Step Over                                                           | F10        
+Step Into                                                           | F11        
+Step out of current function scope                                  | F12        

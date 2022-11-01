@@ -31,6 +31,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'jpalardy/vim-slime'
 Plug 'metakirby5/codi.vim'
 Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/vim-be-good'
 Plug 'ThePrimeagen/refactoring.nvim'
 
 " Productivity
@@ -47,8 +48,10 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'rcarriga/nvim-notify'
 Plug 'scrooloose/nerdcommenter'
+Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-eunuch'
@@ -60,6 +63,9 @@ Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
 Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
+
+" Debugger
+Plug 'puremourning/vimspector'
 
 call plug#end()
 
@@ -255,6 +261,14 @@ augroup END
 " vim-printer
 let g:vim_printer_print_below_keybinding = '<leader>d'
 let g:vim_printer_print_above_keybinding = '<leader>D'
+
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
 
 " Don't forget to 
 " :UpdateRemotePlugins
