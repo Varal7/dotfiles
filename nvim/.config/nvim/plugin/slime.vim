@@ -16,8 +16,8 @@ let @s = '^"wdt,x:call Cur(w),,j'
 nmap <leader>v <Plug>SlimeConfig
 
 "In visual mode, send selection
-xmap <leader><leader> <Plug>SlimeRegionSend
-nmap <leader><leader> <S-v><Plug>SlimeRegionSend
+xmap <CR><CR> <Plug>SlimeRegionSend
+nmap <CR><CR> <S-v><Plug>SlimeRegionSend
 
 "Find what's before =
 nmap <leader>= ^"ayt=o<Esc>"ap

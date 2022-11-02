@@ -33,6 +33,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'ThePrimeagen/refactoring.nvim'
+Plug 'ThePrimeagen/vim-be-good'
 
 " Productivity
 Plug 'airblade/vim-rooter'
@@ -131,7 +132,7 @@ inoremap jk <Esc>
 inoremap Jk <Esc>
 tnoremap jk <C-\><C-n>
 
-let mapleader = ","
+let mapleader = " "
 let maplocalleader = "\\"
 
 nnoremap <leader>ll  :set relativenumber!<CR>
@@ -167,8 +168,8 @@ augroup myvimrc
 augroup END
 
 " Fold with space
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
+" nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+" vnoremap <Space> zf
 
 " Rainbow
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -229,9 +230,6 @@ function! ToggleDiff()
 endfunction
 nnoremap <leader>w :call ToggleDiff()<cr>
 
-" <leader>Enter to turn hl off
-nnoremap <leader><Space> :noh<CR>
-
 nnoremap <leader>ev :edit $MYVIMRC<cr>
 
 iabbrev improt import
@@ -274,4 +272,3 @@ xmap <Leader>di <Plug>VimspectorBalloonEval
 " :UpdateRemotePlugins
 "
 lua require("varal7")
-
