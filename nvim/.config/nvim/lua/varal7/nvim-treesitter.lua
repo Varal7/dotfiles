@@ -32,7 +32,7 @@ require'nvim-treesitter.configs'.setup {
     "ruby",
     "rust",
     "solidity",
-    "swift",
+    -- "swift",
     "tsx",
     "typescript",
     "vim",

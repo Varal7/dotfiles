@@ -28,7 +28,7 @@ Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'kyazdani42/nvim-web-devicons'
 
 " repl
-Plug 'jpalardy/vim-slime'
+Plug 'jpalardy/vim-slime', {'branch': 'main'}
 Plug 'metakirby5/codi.vim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/vim-be-good'
