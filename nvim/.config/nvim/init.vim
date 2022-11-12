@@ -35,6 +35,10 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'ThePrimeagen/refactoring.nvim'
 Plug 'ThePrimeagen/vim-be-good'
 
+" Completion
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'github/copilot.vim', {'branch': 'main'}
+
 " Productivity
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/vim-easy-align'
@@ -43,7 +47,6 @@ Plug 'machakann/vim-swap'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'meain/vim-printer'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
@@ -142,10 +145,6 @@ cnoremap WQ wq
 
 nnoremap <silent> Q <nop>
 
-" Move lines in select mode
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
 " keep cursor centered
 nnoremap J mzJ`z
 nnoremap Y yg$
@@ -221,6 +220,7 @@ xnoremap <localleader>p "_dP
 " Put from capture
 nnoremap <leader>ret :r /tmp/capture.out<CR>
 
+
 function! ToggleDiff()
  if (&diff == 0)
    windo diffthis
@@ -230,7 +230,7 @@ function! ToggleDiff()
 endfunction
 nnoremap <leader>w :call ToggleDiff()<cr>
 
-nnoremap <leader>ev :edit $MYVIMRC<cr>
+nnoremap <leader>kk :edit $MYVIMRC<cr>
 
 iabbrev improt import
 
@@ -262,6 +262,12 @@ let g:vim_printer_print_above_keybinding = '<leader>D'
 
 " vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
+
+"
+let g:copilot_node_command = "~/.nvm/versions/node/v16.0.0/bin/node"
+imap <silent><script><expr> <C-l> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
 
 " for normal mode - the word under the cursor
 nmap <Leader>di <Plug>VimspectorBalloonEval

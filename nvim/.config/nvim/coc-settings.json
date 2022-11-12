@@ -11,7 +11,8 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "nvim-web-devicons",
   "coc.preferences.colorSupport": true,
+  "colors.enable": true,
   "pairs.enableCharacters": ["(", "[", "{", "<"],
+  "suggest.noselect": true,
   "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]"
-
 }

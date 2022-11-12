@@ -11,3 +11,7 @@ Run to Cursor                                                       | <leader>F8
 Step Over                                                           | F10        
 Step Into                                                           | F11        
 Step out of current function scope                                  | F12        
+
+## Fugitive
+
+Git blame | <leader>gbl

@@ -6,7 +6,7 @@ let g:coc_global_extensions = [
       \  'coc-neosnippet',
       \  'coc-snippets',
       \  'coc-tsserver',
-      \  'coc-tabnine',
+      \  'coc-deno',
       \  'coc-pairs',
       \  'coc-git',
       \  'coc-lists',
@@ -18,6 +18,7 @@ let g:coc_global_extensions = [
       \  'coc-pyright',
       \  'coc-solidity'
       \ ]
+      " \  'coc-tabnine',
 
 
 " " navigate chunks of current buffer
@@ -35,13 +36,13 @@ xmap ag <Plug>(coc-git-chunk-outer)
 
 
 " Better display for messages
-set statusline+=%{coc#status()}
+" set statusline+=%{coc#status()}
+set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" airline integration with coc.vim
 
-set cmdheight=1
 set signcolumn=yes
+
 nmap [c <Plug>(coc-diagnostic-prev)
 nmap ]c <Plug>(coc-diagnostic-next)
 
@@ -56,30 +57,37 @@ inoremap <silent><expr> <c-t> coc#refresh()
 nnoremap <leader>cmd :CocCommand<CR>
 
 " Open explorer
-nnoremap <space>e :CocCommand explorer<CR>
-nnoremap - :CocCommand explorer<CR>
-
+nnoremap - :CocCommand explorer --reveal-when-open --position right<CR>
+" nnoremap - :CocCommand explorer<CR>
+ 
 highlight link CocErrorSign GruvboxRed
 " highlight link CocWarningSign
 " highlight link CocWarningSign
 " highlight link CocInfoSign
 " highlight link CocHintSign
 
-
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <c-\> coc#refresh()
 
 " Remap keys for gotos
 nmap  gd <Plug>(coc-definition)
@@ -97,6 +105,8 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+set updatetime=300
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold *  call CocActionAsync('highlight')
@@ -120,6 +130,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>qa  :call CocAction('fixAll')
 
 command! -nargs=0 Format :call CocAction('format')
 
@@ -152,7 +163,7 @@ nnoremap  <localleader>k  :<C-u>CocPrev<CR>
 nnoremap  <localleader>p  :<C-u>CocListResume<CR>
 
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+" imap <C-l> <Plug>(coc-snippets-expand)
 
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
