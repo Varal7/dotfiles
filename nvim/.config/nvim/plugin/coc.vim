@@ -43,10 +43,14 @@ set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 set signcolumn=yes
 
-nmap [c <Plug>(coc-diagnostic-prev)
-nmap ]c <Plug>(coc-diagnostic-next)
+nmap [d <Plug>(coc-diagnostic-prev)
+nmap ]d <Plug>(coc-diagnostic-next)
 
+
+nmap <CR>k :CocListResume<CR>
+nmap ]K :CocLast<CR>
 nmap ]k :CocNext<CR>
+nmap [K :CocFirst<CR>
 nmap [k :CocPrev<CR>
 
 nmap <leader>rn <Plug>(coc-rename)
@@ -57,7 +61,7 @@ inoremap <silent><expr> <c-t> coc#refresh()
 nnoremap <leader>cmd :CocCommand<CR>
 
 " Open explorer
-nnoremap - :CocCommand explorer --reveal-when-open --position right<CR>
+nnoremap <leader>e :CocCommand explorer --reveal-when-open --position left<CR>
 " nnoremap - :CocCommand explorer<CR>
  
 highlight link CocErrorSign GruvboxRed
@@ -127,7 +131,7 @@ vmap <localleader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>la  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 nmap <leader>qa  :call CocAction('fixAll')
@@ -137,7 +141,7 @@ command! -nargs=0 Format :call CocAction('format')
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end

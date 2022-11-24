@@ -25,7 +25,13 @@ Plug 'tree-sitter/tree-sitter-python'
 " Pretty
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
-Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'folke/which-key.nvim'
+Plug 'onsails/lspkind.nvim'
+Plug 'stevearc/dressing.nvim'
+Plug 'rcarriga/nvim-notify'
+" Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+
 
 " repl
 Plug 'jpalardy/vim-slime', {'branch': 'main'}
@@ -33,11 +39,11 @@ Plug 'metakirby5/codi.vim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'ThePrimeagen/refactoring.nvim'
-Plug 'ThePrimeagen/vim-be-good'
+Plug 'akinsho/toggleterm.nvim'
 
 " Completion
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'github/copilot.vim', {'branch': 'main'}
+Plug 'github/copilot.vim'
 
 " Productivity
 Plug 'airblade/vim-rooter'
@@ -53,7 +59,6 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'rcarriga/nvim-notify'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'terryma/vim-expand-region'
@@ -67,9 +72,13 @@ Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
 Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
+Plug 'folke/which-key.nvim'
+
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " Debugger
 Plug 'puremourning/vimspector'
+" Plug 'eliba2/vim-node-inspect'
 
 call plug#end()
 
@@ -190,6 +199,8 @@ nnoremap ]L :llast<CR>
 
 nnoremap <C-J> <C-W>w
 nnoremap <C-K> <C-W>W
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 nmap <C-N> :vsplit<CR>
 nmap <C-C> :close<CR>
 
@@ -228,9 +239,11 @@ function! ToggleDiff()
    diffoff!
  endif
 endfunction
-nnoremap <leader>w :call ToggleDiff()<cr>
+nnoremap <leader>td :call ToggleDiff()<cr>
 
-nnoremap <leader>kk :edit $MYVIMRC<cr>
+nnoremap <leader>ss :edit $MYVIMRC<cr>
+nnoremap <leader>h :noh<cr>
+nnoremap <leader>w :w<cr>
 
 iabbrev improt import
 
@@ -273,6 +286,20 @@ let g:copilot_no_tab_map = v:true
 nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>di <Plug>VimspectorBalloonEval
+
+
+" nnoremap <silent> `` :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
+
+" Debugger
+" nnoremap <silent><F4> :NodeInspectStart<cr>
+" nnoremap <silent><F5> :NodeInspectRun<cr>
+" nnoremap <silent><F6> :NodeInspectConnect("127.0.0.1:9230")<cr>
+" nnoremap <silent><F7> :NodeInspectStepInto<cr>
+" nnoremap <silent><F8> :NodeInspectStepOver<cr>
+" nnoremap <silent><F9> :NodeInspectToggleBreakpoint<cr>
+" nnoremap <silent><F10> :NodeInspectStop<cr>
+
+let g:vimspector_base_dir='/Users/varal7/.vim/plugged/vimspector'
 
 " Don't forget to 
 " :UpdateRemotePlugins

@@ -1,6 +1,7 @@
 " Extracts
 vnoremap <silent> <leader>re :lua require("refactoring").refactor(106)<CR>
 nnoremap <silent> <leader>ri :lua require("refactoring").refactor(123)<CR>
+nnoremap <silent> <leader>rv :lua require("refactoring").refactor(119)<CR>
 
 nnoremap <silent> <leader>dh :lua print(vim.inspect(require("refactoring").debug.get_path()))<CR>
 nnoremap <silent> <leader>dg :lua require("refactoring").debug.printf({below = false})<CR>

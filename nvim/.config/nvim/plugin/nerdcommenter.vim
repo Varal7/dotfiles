@@ -6,3 +6,5 @@ let g:NERDCompactSexyComs = 1
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
 
+nnoremap <leader>/ <Plug>NERDCommenterInvert
+vnoremap <leader>/ <Plug>NERDCommenterInvert

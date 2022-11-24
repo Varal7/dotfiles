@@ -24,6 +24,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.local/share/neovim/bin:$PATH"
 
 if ! type "$hub" > /dev/null; then
   eval "$(hub alias -s)"
@@ -57,6 +58,7 @@ alias ipy="ipython"
 alias code='tmux new-session -s code "ipython" || t code'
 alias reyarn="trash yarn.lock node_modules/ && yarn"
 alias fromcloud="curl https://vrac.varal7.fr/last.sh | sh"
+alias lg="lazygit"
 
 
 # My functions
