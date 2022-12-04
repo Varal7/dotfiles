@@ -14,4 +14,5 @@ nmap <leader>tt :lua require("harpoon.term").gotoTerminal({idx=1})<CR>
 nmap <leader>t1 :lua require("harpoon.term").sendCommand(1, 1)<CR>
 nmap <leader>t2 :lua require("harpoon.term").sendCommand(1, 2)<CR>
 nmap <leader>t3 :lua require("harpoon.term").sendCommand(1, 3)<CR>
+nmap <leader>t4 :lua require("harpoon.term").sendCommand(1, 4)<CR>
 

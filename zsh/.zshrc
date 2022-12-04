@@ -59,7 +59,12 @@ alias code='tmux new-session -s code "ipython" || t code'
 alias reyarn="trash yarn.lock node_modules/ && yarn"
 alias fromcloud="curl https://vrac.varal7.fr/last.sh | sh"
 alias lg="lazygit"
-
+alias pclean='pnpm clean && rmall && rm pnpm-lock.yaml && pnpm i && pnpm generate && pnpm build'
+alias rmnode="find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
+alias rmdist="find . -name 'dist' -type d -prune -exec rm -rf '{}' +"
+alias rmstore="find . -name '.DS_Store' -type f -delete"
+alias rmts="find . -name 'tsconfig.tsbuildinfo' -type f -delete"
+alias rmall="rmnode && rmdist && rmstore && rmts"
 
 # My functions
 take() {
@@ -143,4 +148,5 @@ fi
 if [[ -r ~/.ghcup/env ]]; then
   source ~/.ghcup/env
 fi
+
 

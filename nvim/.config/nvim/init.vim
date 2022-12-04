@@ -26,7 +26,6 @@ Plug 'tree-sitter/tree-sitter-python'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'folke/which-key.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'rcarriga/nvim-notify'
@@ -168,6 +167,13 @@ cnoremap w!! w !sudo tee > /dev/null %
 "" Remove trailing spaces and trailing lines
 autocmd FileType c,cpp,java,php,python,tex,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd FileType python,java setlocal shiftwidth=4 softtabstop=0 expandtab
+autocmd FileType go setlocal tabstop=4 noexpandtab
+
+augroup gofmt
+  autocmd!
+  au BufWritePost *.go silent !gofmt -w %
+augroup END
+
 
 " reload vimrc on save
 augroup myvimrc
@@ -241,9 +247,9 @@ function! ToggleDiff()
 endfunction
 nnoremap <leader>td :call ToggleDiff()<cr>
 
-nnoremap <leader>ss :edit $MYVIMRC<cr>
+nnoremap <leader>kk :edit $MYVIMRC<cr>
 nnoremap <leader>h :noh<cr>
-nnoremap <leader>w :w<cr>
+nnoremap <leader>s :w<cr>
 
 iabbrev improt import
 
