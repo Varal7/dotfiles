@@ -1,17 +1,10 @@
-# export ZSH=~/.oh-my-zsh
-ZSH_THEME="spaceship"
 HIST_STAMPS="yyyy-mm-dd"
-# plugins=(git zsh-syntax-highlighting z zsh-completions)
-# plugins+=(zsh-nvm)
 
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 
 source "$HOME/.zsh/spaceship/spaceship.zsh"
 . $HOME/.zsh/z.sh
-
-
-# source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -48,7 +41,6 @@ unset conf
 
 # My aliases
 
-# unalias ll
 alias vim="nvim"
 alias sl="exa --icons"
 alias l="exa --icons"
