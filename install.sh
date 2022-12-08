@@ -18,7 +18,7 @@ stow python
 stow nvim
 stow personal
 
-if  [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" == "Darwin" ]; then
   stow skhd
   stow yabai
   stow kitty
@@ -30,9 +30,26 @@ nvim -c 'PlugInstall' -c 'qa!'
 # Install zsh extensions
 
 mkdir -p "$HOME/.zsh"
-git clone --depth=1 https://github.com/spaceship-prompt/spaceship-prompt.git "$HOME/.zsh/spaceship"
-wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O "$HOME/.zsh/z.sh"
-
+# spaceship
+if [ ! -d "$HOME/.zsh/spaceship" ] ; then
+  git clone --depth=1 https://github.com/spaceship-prompt/spaceship-prompt.git "$HOME/.zsh/spaceship"
+fi
+# z for jump
+if [ ! -a "$HOME/.zsh/z.sh" ] ; then
+  wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O "$HOME/.zsh/z.sh"
+fi
+# zsh-nvm
+if [ ! -d "$HOME/.zsh/zsh-nvm" ] ; then
+  git clone https://github.com/lukechilds/zsh-nvm.git "$HOME/.zsh/zsh-nvm"
+fi
+# zsh syntax highlighting
+if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ] ; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
+fi
+# completions
+if [ ! -d "$HOME/.zsh/zsh-completions" ] ; then
+  git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.zsh/zsh-completions"
+fi
 
 # ## Spaceship
 # git clone https://github.com/denysdovhan/spaceship-prompt.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship-prompt --depth=2

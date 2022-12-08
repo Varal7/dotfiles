@@ -2,9 +2,21 @@ HIST_STAMPS="yyyy-mm-dd"
 
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
+export ZSH=$HOME/.zsh
 
-source "$HOME/.zsh/spaceship/spaceship.zsh"
-. $HOME/.zsh/z.sh
+# Load extensions
+#
+# spaceship
+source "$ZSH/spaceship/spaceship.zsh"
+# z for jump
+. $ZSH/z.sh
+# zsh-nvm
+source $ZSH/zsh-nvm/zsh-nvm.plugin.zsh
+# zsh syntax-highlighting
+source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# zsh completions
+# fpath=($ZSH/zsh-completions/src $fpath)
+#  rm -f ~/.zcompdump; compinit
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -41,7 +53,7 @@ unset conf
 
 # My aliases
 
-alias vim="nvim"
+alias vim="node -v > /dev/null && nvim"
 alias sl="exa --icons"
 alias l="exa --icons"
 alias ll="exa --icons -la -snew"
@@ -61,7 +73,7 @@ alias rmdist="find . -name 'dist' -type d -prune -exec rm -rf '{}' +"
 alias rmstore="find . -name '.DS_Store' -type f -delete"
 alias rmts="find . -name 'tsconfig.tsbuildinfo' -type f -delete"
 alias rmall="rmnode && rmdist && rmstore && rmts"
-alias t="tmux a -t"
+# alias t="tmux a -t"
 
 
 # My functions
@@ -81,6 +93,14 @@ cap () { tee /tmp/capture.out; }
 ret () { cat /tmp/capture.out; }
 
 export PYTHONBREAKPOINT=ipdb.set_trace
+
+t() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
 
 if [[ -a ~/.local-zshrc ]]; then
     source ~/.local-zshrc
