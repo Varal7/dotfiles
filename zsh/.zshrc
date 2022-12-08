@@ -1,13 +1,17 @@
-export ZSH=~/.oh-my-zsh
+# export ZSH=~/.oh-my-zsh
 ZSH_THEME="spaceship"
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git zsh-syntax-highlighting z zsh-completions)
-plugins+=(zsh-nvm)
+# plugins=(git zsh-syntax-highlighting z zsh-completions)
+# plugins+=(zsh-nvm)
 
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 
-source $ZSH/oh-my-zsh.sh
+source "$HOME/.zsh/spaceship/spaceship.zsh"
+. $HOME/.zsh/z.sh
+
+
+# source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -44,7 +48,7 @@ unset conf
 
 # My aliases
 
-unalias ll
+# unalias ll
 alias vim="nvim"
 alias sl="exa --icons"
 alias l="exa --icons"
@@ -65,6 +69,8 @@ alias rmdist="find . -name 'dist' -type d -prune -exec rm -rf '{}' +"
 alias rmstore="find . -name '.DS_Store' -type f -delete"
 alias rmts="find . -name 'tsconfig.tsbuildinfo' -type f -delete"
 alias rmall="rmnode && rmdist && rmstore && rmts"
+alias t="tmux a -t"
+
 
 # My functions
 take() {
@@ -76,22 +82,6 @@ getl () {
   sed "$1q;d"
   # head -n $1 | tail -n 1
 }
-
-
-# Codi
-# Usage: codi [filetype] [filename]
-codi() {
-  local syntax="${1:-python}"
-  shift
-  vim -c \
-    "let g:startify_disable_at_vimenter = 1 |\
-    set bt=nofile ls=0 noru nonu nornu |\
-    hi ColorColumn ctermbg=NONE |\
-    hi VertSplit ctermbg=NONE |\
-    hi NonText ctermfg=0 |\
-    Codi $syntax" "$@"
-}
-
 # capture the output of a command so it can be retrieved with ret
 cap () { tee /tmp/capture.out; }
 
@@ -99,47 +89,6 @@ cap () { tee /tmp/capture.out; }
 ret () { cat /tmp/capture.out; }
 
 export PYTHONBREAKPOINT=ipdb.set_trace
-
-timezsh() {
-  shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
-}
-
-
-fo() {
-  local out file key
-  IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
-  if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
-  fi
-}
-
-# t - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
-
-t() {
-  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
-  if [ $1 ]; then
-    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
-  fi
-  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
-}
-
-# like normal z when used with arguments but displays an fzf prompt when used without.
-unalias z
-z() {
-  if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
-  else
-    _last_z_args="$@"
-    _z "$@"
-  fi
-}
-
-zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
-}
 
 if [[ -a ~/.local-zshrc ]]; then
     source ~/.local-zshrc
@@ -149,4 +98,4 @@ if [[ -r ~/.ghcup/env ]]; then
   source ~/.ghcup/env
 fi
 
-
+bindkey -e

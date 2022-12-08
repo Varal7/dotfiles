@@ -23,7 +23,6 @@ export SPACESHIP_PROMPT_ORDER=(
     # gcloud        # Google Cloud Platform section
     venv          # virtualenv section
     conda         # conda virtualenv section
-    pyenv         # Pyenv section
     # dotnet        # .NET section
     # ember         # Ember.js section
     # kubectl       # Kubectl context section
@@ -44,7 +43,7 @@ SPACESHIP_GIT_LAST_COMMIT_SHOW="${SPACESHIP_GIT_LAST_COMMIT_SHOW=true}"
 SPACESHIP_GIT_LAST_COMMIT_SYMBOL="${SPACESHIP_GIT_LAST_COMMIT_SYMBOL=""}"
 SPACESHIP_GIT_LAST_COMMIT_PREFIX="${SPACESHIP_GIT_LAST_COMMIT_PREFIX="("}"
 SPACESHIP_GIT_LAST_COMMIT_SUFFIX="${SPACESHIP_GIT_LAST_COMMIT_SUFFIX=") "}"
-SPACESHIP_GIT_LAST_COMMIT_COLOR="${SPACESHIP_GIT_LAST_COMMIT_COLOR="magenta"}"
+SPACESHIP_GIT_LAST_COMMIT_COLOR="${SPACESHIP_GIT_LAST_COMMIT_COLOR="white"}"
 
 spaceship_git_last_commit() {
   [[ $SPACESHIP_GIT_LAST_COMMIT_SHOW == false ]] && return
@@ -57,11 +56,18 @@ spaceship_git_last_commit() {
 
   [[ -z $git_last_commit_status ]] && return
 
-  spaceship::section \
-    "$SPACESHIP_GIT_LAST_COMMIT_COLOR" \
-    "$SPACESHIP_GIT_LAST_COMMIT_PREFIX" \
-    "$SPACESHIP_GIT_LAST_COMMIT_SYMBOL$git_last_commit_status" \
-    "$SPACESHIP_GIT_LAST_COMMIT_SUFFIX"
+  spaceship::section::v4 \
+    --color  "$SPACESHIP_GIT_LAST_COMMIT_COLOR" \
+    --prefix "$SPACESHIP_GIT_LAST_COMMIT_PREFIX" \
+    --suffix "$SPACESHIP_GIT_LAST_COMMIT_SUFFIX" \
+    --symbol "$SPACESHIP_GIT_LAST_COMMIT_SYMBOL" \
+    "$git_last_commit_status"
+
+  # spaceship::section \
+  #   "$SPACESHIP_GIT_LAST_COMMIT_COLOR" \
+  #   "$SPACESHIP_GIT_LAST_COMMIT_PREFIX" \
+  #   "$SPACESHIP_GIT_LAST_COMMIT_SYMBOL$git_last_commit_status" \
+  #   "$SPACESHIP_GIT_LAST_COMMIT_SUFFIX"
 
 }
 
