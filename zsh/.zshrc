@@ -4,6 +4,8 @@ export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 export ZSH=$HOME/.zsh
 
+# Load extensions
+#
 # spaceship
 source "$ZSH/spaceship/spaceship.zsh"
 # z for jump
@@ -14,7 +16,10 @@ source $ZSH/zsh-nvm/zsh-nvm.plugin.zsh
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh completions
 # fpath=($ZSH/zsh-completions/src $fpath)
-# rm -f ~/.zcompdump; compinit
+#  rm -f ~/.zcompdump; compinit
+# spaceship vi
+source $ZSH/spaceship-vi-mode/spaceship-vi-mode.plugin.zsh
+
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -109,3 +114,9 @@ if [[ -r ~/.ghcup/env ]]; then
 fi
 
 bindkey -e
+
+# Spaceship
+spaceship add --after line_sep vi_mode
+alias vit=spaceship_vi_mode_enable
+alias vitoff=spaceship_vi_mode_disable
+

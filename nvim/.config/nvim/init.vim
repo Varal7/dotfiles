@@ -10,7 +10,6 @@ call plug#begin('~/.vim/plugged')
 
 " Languages
 Plug 'chrisbra/csv.vim'
-" Plug 'OmniSharp/omnisharp-vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'google/vim-jsonnet'
@@ -30,7 +29,6 @@ Plug 'onsails/lspkind.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'rcarriga/nvim-notify'
 " Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
-
 
 " repl
 Plug 'jpalardy/vim-slime', {'branch': 'main'}
@@ -72,7 +70,6 @@ Plug 'wakatime/vim-wakatime'
 Plug 'wellle/targets.vim'
 Plug 'will133/vim-dirdiff'
 Plug 'folke/which-key.nvim'
-
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " Debugger
@@ -85,9 +82,6 @@ filetype plugin indent on
 
 colorscheme embark
 
-let g:embark_terminal_italics = 1
-let g:embark_terminalcolors = 1
-
 hi Normal guibg=NONE ctermbg=NONE
 
 if exists('$TMUX')
@@ -98,7 +92,8 @@ endif
 
 " true colors in vim
 set termguicolors
-" set notermguicolors
+"" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
 
 " enables syntax highlighting by default.
 if has("syntax")
@@ -108,6 +103,7 @@ endif
 " Have vim jump to the last position when reoping a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+" Some options
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
@@ -124,33 +120,29 @@ set noshowmode
 set ruler
 set autoindent
 set title
+set cursorline
+set lazyredraw
+set splitbelow
+set splitright
+set undofile
 
 " Have a the absolute line number and the relative line number
 set number relativenumber
-
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-" Always show statusline
-
-"" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
 
 set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 
-" Make life easier
+" Make life easier with some aliases
 inoremap jk <Esc>
 inoremap Jk <Esc>
 tnoremap jk <C-\><C-n>
-
 let mapleader = " "
 let maplocalleader = "\\"
-
 nnoremap <leader>ll  :set relativenumber!<CR>
-
 cnoremap Wq wq
 cnoremap WQ wq
-
 nnoremap <silent> Q <nop>
 
 " keep cursor centered
@@ -159,31 +151,35 @@ nnoremap Y yg$
 nnoremap n nzz
 nnoremap N Nzz
 
+nnoremap <leader>kk :edit $MYVIMRC<cr>
+nnoremap <leader>h :noh<cr>
+nnoremap <leader>s :w<cr>
+
+iabbrev improt import
+
+
 nnoremap gbc yypkA =<Esc>jOscale=2<Esc>:.,+1!bc<CR>kJ
 
 "" Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! w !sudo tee > /dev/null %
 
+"" Formatting
 "" Remove trailing spaces and trailing lines
 autocmd FileType c,cpp,java,php,python,tex,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd FileType python,java setlocal shiftwidth=4 softtabstop=0 expandtab
 autocmd FileType go setlocal tabstop=4 noexpandtab
 
+"" Format go
 augroup gofmt
   autocmd!
   au BufWritePost *.go silent !gofmt -w %
 augroup END
-
 
 " reload vimrc on save
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
-
-" Fold with space
-" nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-" vnoremap <Space> zf
 
 " Rainbow
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -237,7 +233,6 @@ xnoremap <localleader>p "_dP
 " Put from capture
 nnoremap <leader>ret :r /tmp/capture.out<CR>
 
-
 function! ToggleDiff()
  if (&diff == 0)
    windo diffthis
@@ -246,12 +241,6 @@ function! ToggleDiff()
  endif
 endfunction
 nnoremap <leader>td :call ToggleDiff()<cr>
-
-nnoremap <leader>kk :edit $MYVIMRC<cr>
-nnoremap <leader>h :noh<cr>
-nnoremap <leader>s :w<cr>
-
-iabbrev improt import
 
 " Easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -281,7 +270,6 @@ let g:vim_printer_print_above_keybinding = '<leader>D'
 
 " vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
-
 "
 let g:copilot_node_command = "~/.nvm/versions/node/v16.0.0/bin/node"
 imap <silent><script><expr> <C-l> copilot#Accept("\<CR>")
@@ -289,23 +277,15 @@ let g:copilot_no_tab_map = v:true
 
 
 " for normal mode - the word under the cursor
-nmap <Leader>di <Plug>VimspectorBalloonEval
+nmap <Leader>gdi <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
-xmap <Leader>di <Plug>VimspectorBalloonEval
-
-
-" nnoremap <silent> `` :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
-
-" Debugger
-" nnoremap <silent><F4> :NodeInspectStart<cr>
-" nnoremap <silent><F5> :NodeInspectRun<cr>
-" nnoremap <silent><F6> :NodeInspectConnect("127.0.0.1:9230")<cr>
-" nnoremap <silent><F7> :NodeInspectStepInto<cr>
-" nnoremap <silent><F8> :NodeInspectStepOver<cr>
-" nnoremap <silent><F9> :NodeInspectToggleBreakpoint<cr>
-" nnoremap <silent><F10> :NodeInspectStop<cr>
+xmap <Leader>gdi <Plug>VimspectorBalloonEval
 
 let g:vimspector_base_dir='/Users/varal7/.vim/plugged/vimspector'
+
+let g:embark_terminal_italics = 1
+let g:embark_terminalcolors = 1
+
 
 " Don't forget to 
 " :UpdateRemotePlugins
