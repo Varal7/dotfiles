@@ -4,8 +4,6 @@ export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 export ZSH=$HOME/.zsh
 
-# Load extensions
-#
 # spaceship
 source "$ZSH/spaceship/spaceship.zsh"
 # z for jump
@@ -16,7 +14,7 @@ source $ZSH/zsh-nvm/zsh-nvm.plugin.zsh
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh completions
 # fpath=($ZSH/zsh-completions/src $fpath)
-#  rm -f ~/.zcompdump; compinit
+# rm -f ~/.zcompdump; compinit
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

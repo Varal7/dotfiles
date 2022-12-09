@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # Needs to manually install:
-# zsh, oh-my-zsh, tmux, git, hub, nvim, brew (if mac), ripgrep, node, python, stow
-# oh-my-zsh : https://github.com/robbyrussell/oh-my-zsh
-# spaceship-prompt: https://github.com/denysdovhan/spaceship-prompt
+# zsh, tmux, git, hub, nvim, brew (if mac), ripgrep, python, stow, fzf
 
 # On mac:
 # https://github.com/dshnkao/SpaceId
 # https://github.com/koekeishiya/yabai
 # https://github.com/koekeishiya/skhd
 # https://sw.kovidgoyal.net/kitty/binary/
+
+# Do this so stow doesn't do random stuff
+mkdir -p ~/.config/coc
+touch  ~/.config/coc/commands
 
 stow zsh
 stow tmux

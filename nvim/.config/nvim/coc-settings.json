@@ -7,7 +7,7 @@
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "eslint.autoFixOnSave": false,
-  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": [],
   "diagnostic.virtualTextPrefix": "     ■ ",
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "nvim-web-devicons",

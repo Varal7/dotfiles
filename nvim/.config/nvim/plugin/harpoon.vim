@@ -1,6 +1,9 @@
 " harpoon
 nnoremap <silent><leader>mm :lua require("harpoon.mark").add_file()<CR>
 nnoremap <silent><leader>ml :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent><leader>= :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent><leader>+ :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent><leader>` :lua require("harpoon.ui").toggle_quick_menu()<CR>
 
 nnoremap <silent><leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
 nnoremap <silent><leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
@@ -8,6 +11,7 @@ nnoremap <silent><leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
 nnoremap <silent><leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
 
 nnoremap <silent><leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
+nnoremap <silent><leader>t` :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
 nnoremap <silent><leader>mt :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
 " Send to terminal with harpoon
 nmap <leader>tt :lua require("harpoon.term").gotoTerminal({idx=1})<CR>
