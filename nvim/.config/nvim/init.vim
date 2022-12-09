@@ -130,7 +130,6 @@ set undofile
 set number relativenumber
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-
 set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 
@@ -291,3 +290,5 @@ let g:embark_terminalcolors = 1
 " :UpdateRemotePlugins
 "
 lua require("varal7")
+
+set secure exrc
