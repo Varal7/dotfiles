@@ -45,6 +45,7 @@ attributesfile = ~/.gitattributes_global
 smudge = cat
 required = true
 	autocrlf = input
+	pager = less -+F
 
 ;# code notebooks strip out
 ;[filter "fastai-nbstripout-code"]

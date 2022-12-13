@@ -1,4 +1,6 @@
 HIST_STAMPS="yyyy-mm-dd"
+ZSH_DISABLE_COMPFIX="true"
+
 
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
