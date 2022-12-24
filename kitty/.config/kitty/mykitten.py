@@ -7,7 +7,7 @@ from pyfzf.pyfzf import FzfPrompt
 
 def main(args: List[str]) -> Optional[str]:
     fzf = FzfPrompt('/Users/varal7/.fzf/bin/fzf')
-    answer = fzf.prompt(["CSAIL", "MIT"])
+    answer = fzf.prompt(["CSAIL", "MIT", "vultr"])
     if len(answer) > 0:
         return answer[0]
     return None
