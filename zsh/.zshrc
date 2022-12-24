@@ -63,23 +63,30 @@ alias sl="exa --icons"
 alias l="exa --icons"
 alias ll="exa --icons -la -snew"
 alias lt="exa --icons --tree"
+alias lz="exa --icons -la -ssize"
 alias paf="readlink -f"
 alias tl="tmux ls"
 alias g="git"
 alias chmox="chmod +x"
 alias ipy="ipython"
+alias py="ipython"
 alias code='tmux new-session -s code "ipython" || t code'
-alias reyarn="trash yarn.lock node_modules/ && yarn"
 alias fromcloud="curl https://vrac.varal7.fr/last.sh | sh"
 alias lg="lazygit"
+
+# node stuff
+alias reyarn="trash yarn.lock node_modules/ && yarn"
 alias pclean='pnpm clean && rmall && rm pnpm-lock.yaml && pnpm i && pnpm generate && pnpm build'
 alias rmnode="find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
 alias rmdist="find . -name 'dist' -type d -prune -exec rm -rf '{}' +"
 alias rmstore="find . -name '.DS_Store' -type f -delete"
 alias rmts="find . -name 'tsconfig.tsbuildinfo' -type f -delete"
 alias rmall="rmnode && rmdist && rmstore && rmts"
-# alias t="tmux a -t"
 
+# conda stuff
+alias ca="conda activate"
+alias rca="conda deactivate && conda activate"
+alias wp="which python"
 
 # My functions
 take() {
