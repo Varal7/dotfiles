@@ -85,6 +85,19 @@ alias rmstore="find . -name '.DS_Store' -type f -delete"
 alias rmts="find . -name 'tsconfig.tsbuildinfo' -type f -delete"
 alias rmall="rmnode && rmdist && rmstore && rmts"
 
+# alias for moving
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .3="cd ../../.."
+alias .4="cd ../../../.."
+alias .5="cd ../../../../.."
+alias .6="cd ../../../../../.."
+
+
 # conda stuff
 alias ca="conda activate"
 alias rca="conda deactivate && conda activate"

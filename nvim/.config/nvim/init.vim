@@ -42,6 +42,12 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'github/copilot.vim'
 
+" Git stuff
+Plug 'ThePrimeagen/git-worktree.nvim'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-fugitive'
+Plug 'terror/chatgpt.nvim'
+
 " Productivity
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/vim-easy-align'
@@ -61,9 +67,7 @@ Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
