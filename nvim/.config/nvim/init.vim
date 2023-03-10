@@ -296,3 +296,11 @@ let g:embark_terminalcolors = 1
 lua require("varal7")
 
 set secure exrc
+
+function! Timestamp()
+  let timestamp = strftime("%c")
+  call setpos(".", [0, 0, 0])
+  call setline(1, timestamp)
+endfunction
+
+nnoremap <silent> <leader>ts :call Timestamp()<cr>

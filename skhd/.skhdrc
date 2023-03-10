@@ -144,6 +144,12 @@ cmd + alt - space : \
     yabai -m window --toggle float; \
     yabai -m window --toggle border;
 
+# Float / Unfloat current window
+cmd + alt - s : \
+    yabai -m window --toggle float; \
+    yabai -m window --toggle topmost; \
+    yabai -m window --toggle border;
+
 # Make window native fullscreen
 cmd + alt - f         : yabai -m window --toggle zoom-fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen

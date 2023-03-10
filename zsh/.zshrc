@@ -98,6 +98,8 @@ alias .5="cd ../../../../.."
 alias .6="cd ../../../../../.."
 
 
+alias cdlast="cd ./*(/om[1])"
+
 # conda stuff
 alias ca="conda activate"
 alias rca="conda deactivate && conda activate"
