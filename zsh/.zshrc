@@ -102,8 +102,19 @@ alias cdlast="cd ./*(/om[1])"
 
 # conda stuff
 alias ca="conda activate"
+alias cda="conda deactivate"
 alias rca="conda deactivate && conda activate"
 alias wp="which python"
+
+
+# navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias ~="cd ~"
+alias -- -="cd -"
 
 # My functions
 take() {
