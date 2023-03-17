@@ -304,3 +304,7 @@ function! Timestamp()
 endfunction
 
 nnoremap <silent> <leader>ts :call Timestamp()<cr>
+
+" search for the visual selection
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+

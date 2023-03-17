@@ -4,7 +4,8 @@ nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gc :Git commit<CR>
 nnoremap <leader>gl :Git --paginate lg1<CR>
 nnoremap <leader>gp :Git push -u<CR>
-nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap <leader>gv :Gvdiff dev<CR>
 " use gd on a file to open vimdiff
 " then use
 nnoremap <leader>gj :diffget //3<CR>
