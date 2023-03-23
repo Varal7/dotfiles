@@ -80,6 +80,9 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'puremourning/vimspector'
 " Plug 'eliba2/vim-node-inspect'
 
+
+Plug '~/Projects/lama/lama.vim'
+
 call plug#end()
 
 filetype plugin indent on
@@ -273,10 +276,15 @@ let g:vim_printer_print_above_keybinding = '<leader>D'
 
 " vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
-"
+
+" copilot
 let g:copilot_node_command = "~/.nvm/versions/node/v16.0.0/bin/node"
 imap <silent><script><expr> <C-l> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+let g:copilot_filetypes = {
+  \ 'text': v:false,
+  \ }
+
 
 
 " for normal mode - the word under the cursor
@@ -307,4 +315,3 @@ nnoremap <silent> <leader>ts :call Timestamp()<cr>
 
 " search for the visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-

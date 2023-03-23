@@ -11,7 +11,7 @@ function! Cur(...)
   :echom b:slime_config['target_pane']
 endfunction
 
-let @s = '^"wdt,x:call Cur(w),,j'
+let @s = '^"wdt,x:call Cur(w)<CR><CR>j'
 
 nmap <leader>v <Plug>SlimeConfig
 

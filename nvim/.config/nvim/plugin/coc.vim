@@ -16,7 +16,8 @@ let g:coc_global_extensions = [
       \  'coc-prettier',
       \  'coc-explorer',
       \  'coc-pyright',
-      \  'coc-solidity'
+      \  'coc-solidity',
+      \  'coc-vimlsp'
       \ ]
       " \  'coc-tabnine',
 
