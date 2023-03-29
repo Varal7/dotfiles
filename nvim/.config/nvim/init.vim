@@ -46,7 +46,6 @@ Plug 'github/copilot.vim'
 Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
-Plug 'terror/chatgpt.nvim'
 
 " Productivity
 Plug 'airblade/vim-rooter'
@@ -80,8 +79,7 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'puremourning/vimspector'
 " Plug 'eliba2/vim-node-inspect'
 
-
-Plug '~/Projects/lama/lama.vim'
+Plug 'varal7/lama.vim', {'do': { -> lama#install()}}
 
 call plug#end()
 
