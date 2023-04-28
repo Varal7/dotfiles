@@ -29,6 +29,7 @@ Plug 'onsails/lspkind.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'rcarriga/nvim-notify'
 " Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+Plug 'zerowidth/vim-copy-as-rtf'
 
 " repl
 Plug 'jpalardy/vim-slime', {'branch': 'main'}
@@ -312,4 +313,8 @@ endfunction
 nnoremap <silent> <leader>ts :call Timestamp()<cr>
 
 " search for the visual selection
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>N
+
+
+" imap <C-x> <Plug>(lama-toggle)
+" nmap <C-x> <Plug>(lama-toggle)

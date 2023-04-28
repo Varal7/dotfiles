@@ -157,3 +157,7 @@ spaceship add --after line_sep vi_mode
 alias vit=spaceship_vi_mode_enable
 alias vitoff=spaceship_vi_mode_disable
 
+# https://unix.stackexchange.com/questions/250690/how-to-configure-ctrlw-as-delete-word-in-zsh
+autoload -U select-word-style
+select-word-style bash
+export WORDCHARS='.-'

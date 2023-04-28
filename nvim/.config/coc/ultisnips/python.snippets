@@ -50,7 +50,12 @@ logger.addHandler(console)
 endsnippet
 
 snippet tqdm "tqdm" b
-from tqdm import tqdm
+from tqdm.auto import tqdm
+endsnippet
+
+snippet ifmain "ifmain" bA
+if __name__ == "__main__":
+    ${0:pass}
 endsnippet
 
 snippet comp "comp" b
