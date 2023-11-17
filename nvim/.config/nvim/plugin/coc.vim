@@ -55,6 +55,7 @@ nmap [K :CocFirst<CR>
 nmap [k :CocPrev<CR>
 
 nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rf <Plug>(coc-refactor)
 
 " Use <c-t> to trigger completion.
 inoremap <silent><expr> <c-t> coc#refresh()
@@ -128,8 +129,8 @@ omap ac <Plug>(coc-classobj-a)
 
 
 " Remap for format selected region
-vmap <localleader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>ft  <Plug>(coc-format-selected)
+nmap <leader>ft  <Plug>(coc-format-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>la  <Plug>(coc-codeaction)

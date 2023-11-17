@@ -4,11 +4,12 @@ nnoremap <silent><C-_> :lua require('telescope.builtin').current_buffer_fuzzy_fi
 nnoremap <silent><C-b> :lua require('telescope.builtin').buffers()<CR>
 nnoremap <silent><C-q> :lua require('telescope.builtin').quickfix()<CR>
 " nnoremap <silent><C-p> :lua require('telescope.builtin').find_files({ hidden = true})<CR>
-nnoremap <silent><leader>fg :lua require('varal7.telescope').project_files()<CR>
 nnoremap <silent><leader>ff :lua require('telescope.builtin').find_files()<CR>
+nnoremap <silent><leader>fr :lua require('telescope.builtin').oldfiles()<CR> 
+nnoremap <silent><leader>fg :lua require('varal7.telescope').project_files()<CR>
+
 nnoremap <silent><leader>fsf :lua require('telescope.builtin').find_files({ hidden = true})<CR>
 nnoremap <silent><leader>fw :lua require('telescope.builtin').live_grep()<CR>
-nnoremap <silent><leader>fo :lua require('telescope.builtin').oldfiles()<CR>
 nnoremap <silent><leader>fc :lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>")})<CR>
 nnoremap <silent><leader>fb :lua require('telescope.builtin').buffers()<CR>
 

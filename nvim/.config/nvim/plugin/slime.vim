@@ -21,3 +21,13 @@ nmap <CR><CR> <S-v><Plug>SlimeRegionSend
 
 "Find what's before =
 nmap <leader>= ^"ayt=o<Esc>"ap
+
+
+" nmap <CR><CR> "vyy<cmd>call VimuxRunCommand(@v)<CR>
+" xmap <CR><CR> "vy<cmd>call VimuxRunCommand(@v)<CR>
+
+" let g:VimuxOpenExtraArgs = "-b"
+
+" let g:VimuxRunnerQuery = {
+          " \ 'pane': '{up-of}',
+" \}

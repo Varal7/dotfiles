@@ -8,31 +8,25 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Languages
+" " Languages
 Plug 'chrisbra/csv.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'google/vim-jsonnet'
-Plug 'jph00/swift-apple'
-Plug 'leafgarland/typescript-vim'
-Plug 'lervag/vimtex'
-Plug 'tomlion/vim-solidity'
-Plug 'rust-lang/rust.vim'
-Plug 'pantharshit00/vim-prisma'
 Plug 'tree-sitter/tree-sitter-python'
-
-" Pretty
+ 
+" " Pretty
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'onsails/lspkind.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'rcarriga/nvim-notify'
-" Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
-Plug 'zerowidth/vim-copy-as-rtf'
+Plug 'b0o/incline.nvim'
 
 " repl
 Plug 'jpalardy/vim-slime', {'branch': 'main'}
+" Plug 'preservim/vimux'
 Plug 'metakirby5/codi.vim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/vim-be-good'
@@ -48,6 +42,9 @@ Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 
+" Lint
+" Plug 'vim-autoformat/vim-autoformat'
+
 " Productivity
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/vim-easy-align'
@@ -58,8 +55,11 @@ Plug 'mbbill/undotree'
 Plug 'meain/vim-printer'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
+
+Plug 'mhinz/vim-startify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'scrooloose/nerdcommenter'
@@ -67,6 +67,7 @@ Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
@@ -80,7 +81,9 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'puremourning/vimspector'
 " Plug 'eliba2/vim-node-inspect'
 
-Plug 'varal7/lama.vim', {'do': { -> lama#install()}}
+" Do I need fzf?
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -128,7 +131,7 @@ set autoindent
 set title
 set cursorline
 set lazyredraw
-set splitbelow
+" set splitbelow
 set splitright
 set undofile
 
@@ -145,7 +148,7 @@ inoremap Jk <Esc>
 tnoremap jk <C-\><C-n>
 let mapleader = " "
 let maplocalleader = "\\"
-nnoremap <leader>ll  :set relativenumber!<CR>
+nnoremap <leader>ll :set relativenumber!<CR>
 cnoremap Wq wq
 cnoremap WQ wq
 nnoremap <silent> Q <nop>
@@ -157,6 +160,12 @@ nnoremap n nzz
 nnoremap N Nzz
 
 nnoremap <leader>kk :edit $MYVIMRC<cr>
+nnoremap <leader>kb :edit ~/.bashrc<cr>
+nnoremap <leader>kh :edit ~/.hrt.sh<cr>
+nnoremap <leader>kd :edit diffs.sh<cr>
+nnoremap <leader>kr :edit run.sh<cr>
+nnoremap <leader>kj :edit ~/.ipython/profile_default/startup/imports.py<cr>
+
 nnoremap <leader>h :noh<cr>
 nnoremap <leader>s :w<cr>
 
@@ -164,6 +173,7 @@ iabbrev improt import
 
 
 nnoremap gbc yypkA =<Esc>jOscale=2<Esc>:.,+1!bc<CR>kJ
+nnoremap <leader><CR><CR> yyp:.,+1!bash<CR>
 
 "" Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! w !sudo tee > /dev/null %
@@ -184,6 +194,11 @@ augroup END
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+augroup ccfmt
+  autocmd!
+  au BufwritePost *.cc,*.h silent !clang-format-hrt -i %
 augroup END
 
 " Rainbow
@@ -247,6 +262,9 @@ function! ToggleDiff()
 endfunction
 nnoremap <leader>td :call ToggleDiff()<cr>
 
+" Toggle wrap
+nnoremap <leader>tw :set wrap!<cr>
+
 " Easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -277,12 +295,8 @@ let g:vim_printer_print_above_keybinding = '<leader>D'
 let g:vimspector_enable_mappings = 'HUMAN'
 
 " copilot
-let g:copilot_node_command = "~/.nvm/versions/node/v16.0.0/bin/node"
 imap <silent><script><expr> <C-l> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
-let g:copilot_filetypes = {
-  \ 'text': v:false,
-  \ }
 
 
 

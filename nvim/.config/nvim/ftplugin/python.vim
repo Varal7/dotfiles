@@ -1,2 +1,1 @@
-setlocal equalprg=yapf
-setlocal formatprg=yapf
+" Write python specific settings here
