@@ -329,6 +329,43 @@ nnoremap <silent> <leader>ts :call Timestamp()<cr>
 " search for the visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>N
 
+" FZF stuff
+if has('nvim')
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+endif
+nmap <c-p> :GFiles<cr>
+nmap <leader>rr :Rg<space>
+
+" fzf
+" let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+"
+ "--preview '/home/francisco/scripts/batcat --style=numbers --line-range :300 {}'
+ "
+let $FZF_DEFAULT_OPTS="--bind ctrl-a:select-all --preview-window 'right:57%'
+\ --bind ctrl-y:preview-up,ctrl-e:preview-down,
+\ctrl-b:preview-page-up,ctrl-f:preview-page-down,
+\ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
+\shift-up:preview-top,shift-down:preview-bottom,
+\alt-up:half-page-up,alt-down:half-page-down"
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" set shell=bash\ -i " let me use by bash aliases in vim
+
+" nmap <leader>x yyp:.!bash<CR>
+nmap <leader>x :exec 'r!'.getline('.')<CR>
+
+
 
 " imap <C-x> <Plug>(lama-toggle)
 " nmap <C-x> <Plug>(lama-toggle)
