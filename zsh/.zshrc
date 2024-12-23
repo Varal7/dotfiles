@@ -40,6 +40,7 @@ export PATH="$HOME/.cabal/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.local/share/neovim/bin:$PATH"
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH="$HOME/.local/share/bob/nvim-bin":$PATH
 
 if ! type "$hub" > /dev/null; then
   eval "$(hub alias -s)"
@@ -59,7 +60,8 @@ unset conf
 
 # My aliases
 
-alias vim="node -v > /dev/null && nvim"
+# alias vim="node -v > /dev/null && nvim"
+alias vim="nvim"
 alias sl="exa --icons"
 alias l="exa --icons"
 alias ll="exa --icons -la -snew"
