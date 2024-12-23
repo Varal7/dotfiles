@@ -12,7 +12,7 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "nvim-web-devicons",
   "coc.preferences.colorSupport": true,
-  "tsserver.useLocalTsdk": false,
+  "tsserver.useLocalTsdk": true,
   "colors.enable": true,
   "pairs.enableCharacters": ["(", "[", "{", "<"],
   "suggest.noselect": true,

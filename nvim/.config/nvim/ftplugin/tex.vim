@@ -42,3 +42,6 @@ nnoremap <leader>i :call ImageFromClipboard()<CR>
 " let g:tex_conceal='abdmg'
 "
 nnoremap <leader>es :CocCommand snippets.editSnippets<CR>
+
+imap <C-l> <Plug>(lama-toggle)
+nmap <C-l> <Plug>(lama-toggle)

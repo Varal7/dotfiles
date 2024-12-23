@@ -3,7 +3,8 @@
 nnoremap <silent><C-_> :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
 nnoremap <silent><C-b> :lua require('telescope.builtin').buffers()<CR>
 nnoremap <silent><C-q> :lua require('telescope.builtin').quickfix()<CR>
-" nnoremap <silent><C-p> :lua require('telescope.builtin').find_files({ hidden = true})<CR>
+nnoremap <silent><C-p> :lua require('telescope.builtin').find_files({ hidden = true})<CR>
+nnoremap <silent><leader>fg :lua require('varal7.telescope').project_files()<CR>
 nnoremap <silent><leader>ff :lua require('telescope.builtin').find_files()<CR>
 nnoremap <silent><leader>fr :lua require('telescope.builtin').oldfiles()<CR> 
 nnoremap <silent><leader>fg :lua require('varal7.telescope').project_files()<CR>

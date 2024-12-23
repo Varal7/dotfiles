@@ -35,7 +35,9 @@ Plug 'akinsho/toggleterm.nvim'
 
 " Completion
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
+Plug 'Exafunction/codeium.vim'
+
 
 " Git stuff
 Plug 'ThePrimeagen/git-worktree.nvim'
@@ -81,9 +83,11 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'puremourning/vimspector'
 " Plug 'eliba2/vim-node-inspect'
 
-" Do I need fzf?
+" fzf
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
+" Plug 'varal7/lama.vim', {'do': { -> lama#install()}}
 
 call plug#end()
 
@@ -170,7 +174,6 @@ nnoremap <leader>h :noh<cr>
 nnoremap <leader>s :w<cr>
 
 iabbrev improt import
-
 
 nnoremap gbc yypkA =<Esc>jOscale=2<Esc>:.,+1!bc<CR>kJ
 nnoremap <leader><CR><CR> yyp:.,+1!bash<CR>
@@ -297,6 +300,13 @@ let g:vimspector_enable_mappings = 'HUMAN'
 " copilot
 imap <silent><script><expr> <C-l> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+
+" codeium
+let g:codeium_disable_bindings = 1
+imap <script><silent><nowait><expr> <C-l> codeium#Accept()
+" imap <C-n>   <Cmd>call codeium#CycleCompletions(1)<CR>
+" imap <C-p>   <Cmd>call codeium#CycleCompletions(-1)<CR>
+imap <C-x>   <Cmd>call codeium#Clear()<CR>
 
 
 
