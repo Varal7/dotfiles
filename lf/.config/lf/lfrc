@@ -1,0 +1,54 @@
+set icons true
+set sortby time
+set info size
+set reverse
+set scrolloff 10
+
+map D %trash $fx
+
+# edit config
+cmd edit-config ${{
+    $EDITOR ~/.config/lf/lfrc
+    lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+
+map S edit-config
+
+${{
+    if [ "$(uname -s)" = Darwin ]; then
+        lf -remote "send $id map <space> %qlmanage -p \"\$fx\""
+    fi
+}}
+
+map t :toggle; down
+
+
+# toggle preview
+cmd toggle-preview %{{
+    if [ "$lf_preview" = true ]; then
+        lf -remote "send $id :set preview false; set ratios 1:5"
+    else
+        lf -remote "send $id :set preview true; set ratios 1:2:3"
+    fi
+}}
+
+map zp toggle-preview
+
+# move parent
+cmd move-parent &{{
+    dironly="setlocal \"$(dirname -- "$PWD" | sed 's/\\/\\\\/g;s/"/\\"/g')\" dironly"
+    lf -remote "send $id :updir; $dironly true; $1; $dironly false; open"
+}}
+
+map J move-parent down
+map K move-parent up
+
+# renaming
+# unmap the default rename keybinding
+# map r
+# 
+# map i rename
+# map I :rename; cmd-home
+# map A :rename; cmd-end
+# map c :rename; cmd-delete-home
+# map C :rename; cmd-end; cmd-delete-home
