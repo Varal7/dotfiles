@@ -163,3 +163,5 @@ alias vitoff=spaceship_vi_mode_disable
 autoload -U select-word-style
 select-word-style bash
 export WORDCHARS='.-'
+
+alias pb=pbcopy
