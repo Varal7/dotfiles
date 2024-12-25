@@ -30,7 +30,7 @@ map('n', '<C-N>', ':vsplit<CR>', { silent = true })
 map('n', '<C-C>', ':close<CR>', { silent = true })
 
 -- Search for visually selected text
--- map('v', '//', "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
+map('v', '//', "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
 
 -- find what's before `=` and copy it
 map('n', '<leader>=', [[^"ayt=o<Esc>"ap]], { noremap = true, silent = true })

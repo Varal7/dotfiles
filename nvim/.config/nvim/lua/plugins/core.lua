@@ -3,9 +3,17 @@ return {
   { "embark-theme/vim", name = "embark" },
 
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      flavour = "mocha" -- latte, frappe, macchiato, mocha
+    },
+  },
+
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-moon",
+      colorscheme = "catppuccin",
     }
   },
 

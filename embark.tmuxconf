@@ -1,6 +1,11 @@
 # This tmux statusbar config was created by tmuxline.vim
 # on Mon, 17 May 2021
 
+# #63f2f1: selected
+# #100E23: unselected
+# #aaffe4: used for right-most and left-most
+# #F3F3F3: used for text
+
 set -g status-justify "left"
 set -g status "on"
 set -g status-left-style "none"
