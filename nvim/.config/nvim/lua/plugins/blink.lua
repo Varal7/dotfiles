@@ -17,7 +17,7 @@ return {
         },
 
         list = {
-          selection = "manual",
+          selection = "auto_insert",
         },
         documentation = {
           auto_show = true,
