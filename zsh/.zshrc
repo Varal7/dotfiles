@@ -1,9 +1,6 @@
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_DISABLE_COMPFIX="true"
 
-
-export NVM_LAZY_LOAD=true
-export NVM_COMPLETION=true
 export ZSH=$HOME/.zsh
 
 # Load extensions
@@ -12,8 +9,6 @@ export ZSH=$HOME/.zsh
 source "$ZSH/spaceship/spaceship.zsh"
 # z for jump
 . $ZSH/z.sh
-# zsh-nvm
-source $ZSH/zsh-nvm/zsh-nvm.plugin.zsh
 # zsh syntax-highlighting
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh completions
@@ -155,9 +150,9 @@ fi
 bindkey -e
 
 # Spaceship
-spaceship add --after line_sep vi_mode
-alias vit=spaceship_vi_mode_enable
-alias vitoff=spaceship_vi_mode_disable
+# spaceship add --after line_sep vi_mode
+# alias vit=spaceship_vi_mode_enable
+# alias vitoff=spaceship_vi_mode_disable
 
 # https://unix.stackexchange.com/questions/250690/how-to-configure-ctrlw-as-delete-word-in-zsh
 autoload -U select-word-style
@@ -165,3 +160,5 @@ select-word-style bash
 export WORDCHARS='.-'
 
 alias pb=pbcopy
+
+. "$HOME/.local/bin/env"

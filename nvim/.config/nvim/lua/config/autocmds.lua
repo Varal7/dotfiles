@@ -8,3 +8,9 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 vim.api.nvim_del_augroup_by_name("lazyvim_resize_splits")
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.cursorline = false
+  end,
+})

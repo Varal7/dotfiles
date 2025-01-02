@@ -32,6 +32,22 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
+    keys = {
+      {
+        "<leader>fe",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root(), reveal = true })
+        end,
+        desc = "Explorer NeoTree (Root Dir)",
+      },
+      {
+        "<leader>fE",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd(), reveal = true })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
+    },
     opts = {
       window = {
         mappings = {

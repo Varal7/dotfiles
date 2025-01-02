@@ -4,7 +4,8 @@
 
 vim.g.snacks_animate = false -- cancel animations
 vim.opt.clipboard = ""       -- dont' default to system clipboard
-vim.opt.scrolloff = 0        -- don't add extra scrolloff
+-- vim.opt.scrolloff = 0        -- don't add extra scrolloff
+vim.opt.splitkeep = "cursor" -- keep cursor in same position when splitting
 vim.opt.wrap = true          -- Enable line wrap
 
 vim.g.ai_cmp = false         -- disable ai in cmp
